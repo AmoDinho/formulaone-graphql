@@ -1,18 +1,6 @@
 const {GraphQLServer} = require('graphql-yoga')
 
-const typeDefs = `
-type Query {
-    info: String!
-    feed: [Driver]!
-}
 
-type Driver {
-    id: ID!
-    name: String!
-    team: String!
-    points: Int!
-}
-`
 let drivers = [{
     id: 'driver-0',
     name: 'Simon Tabane',
@@ -20,22 +8,31 @@ let drivers = [{
     points: 20
 }]
 
+let idCount = drivers.length
+
 const resolvers = {
     Query:{
         info: () => `This is the API for the Forumala One App`,
         feed: () => drivers,
     },
-
-    Driver: {
-        id: (root) => root.id,
-        name: (root) => root.name,
-        team: (root) => root.team,
-        points: (root) => root.points,
-    }
+    
+    Mutation:{
+        driver: (root, args) => {
+            const driver ={
+                id: `driver-${idCount++}`,
+                name: args.name,
+                team: args.team,
+                points: args.points,
+            }
+            drivers.push(driver)
+            return driver
+        }
+       
+    },
 }
 
 const server = new GraphQLServer({
-    typeDefs,
+    typeDefs: './src/schema.graphql',
     resolvers,
 })
 

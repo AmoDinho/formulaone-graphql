@@ -24,3 +24,15 @@ Now that you have updated the Schema you can enter the following Query:
   }
 }
 `
+
+Now you run your mutation: 
+
+`mutation{
+  driver(
+    name:"Ruby Ella"
+    team:"Force India"
+    points: 40
+  ){
+    id
+  }
+}`
