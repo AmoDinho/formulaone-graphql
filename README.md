@@ -12,3 +12,15 @@ Then type in the following query:
 query{
     info
 } `
+
+Now that you have updated the Schema you can enter the following Query:
+
+`query{
+  feed{
+    id
+    name
+    team
+    points
+  }
+}
+`
