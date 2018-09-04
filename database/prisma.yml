@@ -1,0 +1,13 @@
+service: formulaone-graphql
+stage: dev
+
+#HTTP ENDPOINT
+endpoint: https://eu1.prisma.sh/public-amberdevourer-412/formulaone-graphql/dev
+
+#point to file that has datamodel
+datamodel: datamodel.graphql
+
+## Your access to an API
+secret: mysecret123
+
+cluster: public-amberdevourer-412/prisma-eu1

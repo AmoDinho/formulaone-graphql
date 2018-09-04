@@ -1,0 +1,7 @@
+type Driver {
+    id: ID! @unique
+    createdAt: DateTime!
+    name: String!
+    team: String!
+    points: Int!
+}
