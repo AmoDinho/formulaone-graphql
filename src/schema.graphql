@@ -1,10 +1,15 @@
 type Query {
     info: String!
     feed: [Driver]!
+    #fetch a driver by its id
+    driver(id:ID!): Driver
 }
 
 type Mutation {
     driver(name: String!, team: String!, points: Int!): Driver!
+
+    #update driver
+    updateDriver(id: ID!, name: String, team: String, points: Int): Driver
 }
 
 type Driver {

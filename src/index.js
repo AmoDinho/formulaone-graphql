@@ -14,6 +14,10 @@ const resolvers = {
     Query:{
         info: () => `This is the API for the Forumala One App`,
         feed: () => drivers,
+        driver: (_, {id}) =>{
+            const rider = drivers.find(rider => rider.id === id)
+            return rider;
+        }
     },
     
     Mutation:{
@@ -26,6 +30,20 @@ const resolvers = {
             }
             drivers.push(driver)
             return driver
+        },
+
+        updateDriver: (_,{id}, root, args) =>{
+            const rider = drivers.find(rider => rider.id === id)
+           drivers.remove(rider => rider.id === id)
+
+           const driver ={
+            id: `driver-${idCount++}`,
+            name: args.name,
+            team: args.team,
+            points: args.points,
+        }
+        drivers.push(driver)
+        return driver
         }
        
     },
