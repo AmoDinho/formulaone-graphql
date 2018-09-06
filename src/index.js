@@ -6,14 +6,12 @@ const resolvers = {
     Query:{
         info: () => `This is the API for the Forumala One App`,
         feed: (root, args, context, info) => {
-            return context.db.query.links({}, info)
+            return context.db.query.drivers({}, info)
         } ,
-
-   
     },
     
     Mutation:{
-       post: (root, args, context, info) =>{
+       driver: (root, args, context, info) =>{
            return context.db.mutation.createDriver({
                data:{
                    name: args.name,
@@ -34,11 +32,11 @@ const server = new GraphQLServer({
         ...req,
         db: new Prisma({
             typeDefs: 'src/generated/prisma.graphql',
-            endpoint: 'https://eu1.prisma.sh/public-amberdevourer-412/formulaone-graphql/dev',
+            endpoint: 'https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev',
             secret: 'mysecret123',
             debug: true,
         }),
-    })
+    }),
 
 })
 

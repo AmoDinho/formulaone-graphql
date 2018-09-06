@@ -3,19 +3,14 @@ This is a fullstack GraphQL Formula One app
 
 Once you have deployed your Prisma Service head over to the http endpoint and add your prisma token. 
 
-## Commands
+## Instructions
 
+In this part we needed to configure the resolvers to use Prisma Bindings. 
 
+We created an Application layer and databaser layer.
 
-Create a driver:
+However we have a problem when running ```prisma deploy```. Nothing gets generated. So you need run each of the deploy hooks via the terminal.
 
-`mutation{
-  createDriver(data:{
-    name: "Rakim Meyer"
-    team: "HAAS"
-    points: 200
-  }){
-    id
-  }
-}
-`
+Once that is done in one terminal run: ```node src/index.js```
+
+then in the another one run: ```graphql playground```

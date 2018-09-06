@@ -1,0 +1,351 @@
+# source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
+# timestamp: Thu Sep 06 2018 12:54:06 GMT+0200 (South Africa Standard Time)
+
+type AggregateDriver {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+scalar DateTime
+
+type Driver implements Node {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  team: String!
+  points: Int!
+}
+
+"""A connection to a list of items."""
+type DriverConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DriverEdge]!
+  aggregate: AggregateDriver!
+}
+
+input DriverCreateInput {
+  name: String!
+  team: String!
+  points: Int!
+}
+
+"""An edge in a connection."""
+type DriverEdge {
+  """The item at the end of the edge."""
+  node: Driver!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DriverOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  name_ASC
+  name_DESC
+  team_ASC
+  team_DESC
+  points_ASC
+  points_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type DriverPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  team: String!
+  points: Int!
+}
+
+type DriverSubscriptionPayload {
+  mutation: MutationType!
+  node: Driver
+  updatedFields: [String!]
+  previousValues: DriverPreviousValues
+}
+
+input DriverSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DriverSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DriverSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DriverSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DriverWhereInput
+}
+
+input DriverUpdateInput {
+  name: String
+  team: String
+  points: Int
+}
+
+input DriverWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DriverWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DriverWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DriverWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  team: String
+
+  """All values that are not equal to given value."""
+  team_not: String
+
+  """All values that are contained in given list."""
+  team_in: [String!]
+
+  """All values that are not contained in given list."""
+  team_not_in: [String!]
+
+  """All values less than the given value."""
+  team_lt: String
+
+  """All values less than or equal the given value."""
+  team_lte: String
+
+  """All values greater than the given value."""
+  team_gt: String
+
+  """All values greater than or equal the given value."""
+  team_gte: String
+
+  """All values containing the given string."""
+  team_contains: String
+
+  """All values not containing the given string."""
+  team_not_contains: String
+
+  """All values starting with the given string."""
+  team_starts_with: String
+
+  """All values not starting with the given string."""
+  team_not_starts_with: String
+
+  """All values ending with the given string."""
+  team_ends_with: String
+
+  """All values not ending with the given string."""
+  team_not_ends_with: String
+  points: Int
+
+  """All values that are not equal to given value."""
+  points_not: Int
+
+  """All values that are contained in given list."""
+  points_in: [Int!]
+
+  """All values that are not contained in given list."""
+  points_not_in: [Int!]
+
+  """All values less than the given value."""
+  points_lt: Int
+
+  """All values less than or equal the given value."""
+  points_lte: Int
+
+  """All values greater than the given value."""
+  points_gt: Int
+
+  """All values greater than or equal the given value."""
+  points_gte: Int
+}
+
+input DriverWhereUniqueInput {
+  id: ID
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createDriver(data: DriverCreateInput!): Driver!
+  updateDriver(data: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver
+  deleteDriver(where: DriverWhereUniqueInput!): Driver
+  upsertDriver(where: DriverWhereUniqueInput!, create: DriverCreateInput!, update: DriverUpdateInput!): Driver!
+  updateManyDrivers(data: DriverUpdateInput!, where: DriverWhereInput): BatchPayload!
+  deleteManyDrivers(where: DriverWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver]!
+  driver(where: DriverWhereUniqueInput!): Driver
+  driversConnection(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DriverConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  driver(where: DriverSubscriptionWhereInput): DriverSubscriptionPayload
+}

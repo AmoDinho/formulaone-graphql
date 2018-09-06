@@ -1,3 +1,5 @@
+# import Driver from "./generated/prisma.graphql"
+
 type Query {
     info: String!
     feed: [Driver]!
@@ -6,13 +8,4 @@ type Query {
 
 type Mutation {
     driver(name: String!, team: String!, points: Int!): Driver!
-
-    
-}
-
-type Driver {
-    id: ID!
-    name: String!
-    team: String!
-    points: Int!
 }
