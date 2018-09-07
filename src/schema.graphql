@@ -1,4 +1,4 @@
-# import Driver from "./generated/prisma.graphql"
+# import Driver, DriverSubscriptionPayload from "./generated/prisma.graphql"
 
 type Query {
     info: String!
@@ -24,4 +24,8 @@ type User {
     drivers: [Driver!]!
 }
 
+
+type Subscription {
+    newDriver: DriverSubscriptionPayload
+}
 

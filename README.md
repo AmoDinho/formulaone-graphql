@@ -17,40 +17,49 @@ then in the another one run: ```graphql playground```
 
 ------------------------------
 
-Now test the auth mutation:
+
+
+token :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxydm9qcGE4eXJ6MGIxMmlqbnk2cHdoIiwiaWF0IjoxNTM2MzE3MzQ1fQ.tR67_m5ggWqwJO5G9UqmIx9YVch74RaTIqYQ4Yt_j1o"
+
+Make the following subscription: 
 
 ```
-mutation{
-  signup(
-    name: "Thomas Mazibuko"
-    email: "thomas@graph.cool"
-    password: "Passw0rd!"
-  ){
-    token
-    user{
+subscription{
+  newDriver{
+    node{
       id
+      name
+      team
+      points
+      pictureURL
+      podiums
+      championshipWins
+      postedBy{
+        id
+        name
+        email
+      }
     }
   }
 }
-
-
 ```
 
-Here is a mutation to create an new driver:
+create another mutation to test that the subscription works:
+
 ```
 mutation{
   driver(
-    name:"Kimi Räikkönen"
-    team: "Ferrari"
-    points: 1729
-    pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/kimi-raikkonen/_jcr_content/image.img.1024.medium.jpg/1536135072441.jpg"
-    podiums: 100
-    championshipWins: 1
-  ) {
+    name: "Daniel Ricciardo"
+    team: "Red Bull Racing"
+    points: 934
+    pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/daniel-ricciardo/_jcr_content/image.img.1024.medium.jpg/1536135061859.jpg"
+    podiums: 29
+    championshipWins: 0
+    
+  ){
     id
-    name
   }
 }
-```
 
-token :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxydm9qcGE4eXJ6MGIxMmlqbnk2cHdoIiwiaWF0IjoxNTM2MzE3MzQ1fQ.tR67_m5ggWqwJO5G9UqmIx9YVch74RaTIqYQ4Yt_j1o"
+
+```
