@@ -4,4 +4,16 @@ type Driver {
     name: String!
     team: String!
     points: Int!
+    pictureURL: String!
+    podiums: Int!
+    championshipWins:Int!
+    postedBy: User
+}
+
+type User {
+    id: ID! @unique
+    name:String!
+    email: String! @unique
+    password: String!
+    drivers: [Driver!]!
 }

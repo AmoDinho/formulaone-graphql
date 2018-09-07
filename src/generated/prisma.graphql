@@ -1,7 +1,11 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Thu Sep 06 2018 12:54:06 GMT+0200 (South Africa Standard Time)
+# timestamp: Fri Sep 07 2018 12:06:06 GMT+0200 (South Africa Standard Time)
 
 type AggregateDriver {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -18,6 +22,10 @@ type Driver implements Node {
   name: String!
   team: String!
   points: Int!
+  pictureURL: String!
+  podiums: Int!
+  championshipWins: Int!
+  postedBy(where: UserWhereInput): User
 }
 
 """A connection to a list of items."""
@@ -34,6 +42,24 @@ input DriverCreateInput {
   name: String!
   team: String!
   points: Int!
+  pictureURL: String!
+  podiums: Int!
+  championshipWins: Int!
+  postedBy: UserCreateOneWithoutDriversInput
+}
+
+input DriverCreateManyWithoutPostedByInput {
+  create: [DriverCreateWithoutPostedByInput!]
+  connect: [DriverWhereUniqueInput!]
+}
+
+input DriverCreateWithoutPostedByInput {
+  name: String!
+  team: String!
+  points: Int!
+  pictureURL: String!
+  podiums: Int!
+  championshipWins: Int!
 }
 
 """An edge in a connection."""
@@ -56,6 +82,12 @@ enum DriverOrderByInput {
   team_DESC
   points_ASC
   points_DESC
+  pictureURL_ASC
+  pictureURL_DESC
+  podiums_ASC
+  podiums_DESC
+  championshipWins_ASC
+  championshipWins_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -66,6 +98,9 @@ type DriverPreviousValues {
   name: String!
   team: String!
   points: Int!
+  pictureURL: String!
+  podiums: Int!
+  championshipWins: Int!
 }
 
 type DriverSubscriptionPayload {
@@ -111,6 +146,39 @@ input DriverUpdateInput {
   name: String
   team: String
   points: Int
+  pictureURL: String
+  podiums: Int
+  championshipWins: Int
+  postedBy: UserUpdateOneWithoutDriversInput
+}
+
+input DriverUpdateManyWithoutPostedByInput {
+  create: [DriverCreateWithoutPostedByInput!]
+  connect: [DriverWhereUniqueInput!]
+  disconnect: [DriverWhereUniqueInput!]
+  delete: [DriverWhereUniqueInput!]
+  update: [DriverUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [DriverUpsertWithWhereUniqueWithoutPostedByInput!]
+}
+
+input DriverUpdateWithoutPostedByDataInput {
+  name: String
+  team: String
+  points: Int
+  pictureURL: String
+  podiums: Int
+  championshipWins: Int
+}
+
+input DriverUpdateWithWhereUniqueWithoutPostedByInput {
+  where: DriverWhereUniqueInput!
+  data: DriverUpdateWithoutPostedByDataInput!
+}
+
+input DriverUpsertWithWhereUniqueWithoutPostedByInput {
+  where: DriverWhereUniqueInput!
+  update: DriverUpdateWithoutPostedByDataInput!
+  create: DriverCreateWithoutPostedByInput!
 }
 
 input DriverWhereInput {
@@ -286,6 +354,91 @@ input DriverWhereInput {
 
   """All values greater than or equal the given value."""
   points_gte: Int
+  pictureURL: String
+
+  """All values that are not equal to given value."""
+  pictureURL_not: String
+
+  """All values that are contained in given list."""
+  pictureURL_in: [String!]
+
+  """All values that are not contained in given list."""
+  pictureURL_not_in: [String!]
+
+  """All values less than the given value."""
+  pictureURL_lt: String
+
+  """All values less than or equal the given value."""
+  pictureURL_lte: String
+
+  """All values greater than the given value."""
+  pictureURL_gt: String
+
+  """All values greater than or equal the given value."""
+  pictureURL_gte: String
+
+  """All values containing the given string."""
+  pictureURL_contains: String
+
+  """All values not containing the given string."""
+  pictureURL_not_contains: String
+
+  """All values starting with the given string."""
+  pictureURL_starts_with: String
+
+  """All values not starting with the given string."""
+  pictureURL_not_starts_with: String
+
+  """All values ending with the given string."""
+  pictureURL_ends_with: String
+
+  """All values not ending with the given string."""
+  pictureURL_not_ends_with: String
+  podiums: Int
+
+  """All values that are not equal to given value."""
+  podiums_not: Int
+
+  """All values that are contained in given list."""
+  podiums_in: [Int!]
+
+  """All values that are not contained in given list."""
+  podiums_not_in: [Int!]
+
+  """All values less than the given value."""
+  podiums_lt: Int
+
+  """All values less than or equal the given value."""
+  podiums_lte: Int
+
+  """All values greater than the given value."""
+  podiums_gt: Int
+
+  """All values greater than or equal the given value."""
+  podiums_gte: Int
+  championshipWins: Int
+
+  """All values that are not equal to given value."""
+  championshipWins_not: Int
+
+  """All values that are contained in given list."""
+  championshipWins_in: [Int!]
+
+  """All values that are not contained in given list."""
+  championshipWins_not_in: [Int!]
+
+  """All values less than the given value."""
+  championshipWins_lt: Int
+
+  """All values less than or equal the given value."""
+  championshipWins_lte: Int
+
+  """All values greater than the given value."""
+  championshipWins_gt: Int
+
+  """All values greater than or equal the given value."""
+  championshipWins_gte: Int
+  postedBy: UserWhereInput
 }
 
 input DriverWhereUniqueInput {
@@ -300,11 +453,17 @@ scalar Long
 
 type Mutation {
   createDriver(data: DriverCreateInput!): Driver!
+  createUser(data: UserCreateInput!): User!
   updateDriver(data: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteDriver(where: DriverWhereUniqueInput!): Driver
+  deleteUser(where: UserWhereUniqueInput!): User
   upsertDriver(where: DriverWhereUniqueInput!, create: DriverCreateInput!, update: DriverUpdateInput!): Driver!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyDrivers(data: DriverUpdateInput!, where: DriverWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   deleteManyDrivers(where: DriverWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -336,8 +495,11 @@ type PageInfo {
 
 type Query {
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   driver(where: DriverWhereUniqueInput!): Driver
+  user(where: UserWhereUniqueInput!): User
   driversConnection(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DriverConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -348,4 +510,317 @@ type Query {
 
 type Subscription {
   driver(where: DriverSubscriptionWhereInput): DriverSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver!]
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+  password: String!
+  drivers: DriverCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneWithoutDriversInput {
+  create: UserCreateWithoutDriversInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutDriversInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  drivers: DriverUpdateManyWithoutPostedByInput
+}
+
+input UserUpdateOneWithoutDriversInput {
+  create: UserCreateWithoutDriversInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutDriversDataInput
+  upsert: UserUpsertWithoutDriversInput
+}
+
+input UserUpdateWithoutDriversDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutDriversInput {
+  update: UserUpdateWithoutDriversDataInput!
+  create: UserCreateWithoutDriversInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  drivers_every: DriverWhereInput
+  drivers_some: DriverWhereInput
+  drivers_none: DriverWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  email: String
 }

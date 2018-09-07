@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts":{
+    "server": "node src/index.js",
+    "playground": "graphql playground"
+  },
   "dependencies": {
     "graphql-cli": "^2.16.7",
     "graphql-yoga": "^1.16.2",
