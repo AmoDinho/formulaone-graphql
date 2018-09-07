@@ -43,9 +43,9 @@ async function login(parent, args, context, info){
     }
 }
 
-function post(parent, args, context, info){
+function driver(parent, args, context, info){
     const userId = getUserId(context)
-    return context.db.mutation.createLink(
+    return context.db.mutation.createDriver(
         {
             data:{
                 name: args.name,
@@ -64,5 +64,5 @@ function post(parent, args, context, info){
 module.exports = {
     signup,
     login,
-    post,
+    driver,
 }

@@ -14,3 +14,26 @@ However we have a problem when running ```prisma deploy```. Nothing gets generat
 Once that is done in one terminal run: ```node src/index.js```
 
 then in the another one run: ```graphql playground```
+
+------------------------------
+
+Now test the auth mutation:
+
+```
+mutation{
+  signup(
+    name: "Thomas Mazibuko"
+    email: "thomas@graph.cool"
+    password: "Passw0rd!"
+  ){
+    token
+    user{
+      id
+    }
+  }
+}
+
+
+```
+
+token :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxydm9qcGE4eXJ6MGIxMmlqbnk2cHdoIiwiaWF0IjoxNTM2MzE3MzQ1fQ.tR67_m5ggWqwJO5G9UqmIx9YVch74RaTIqYQ4Yt_j1o"
