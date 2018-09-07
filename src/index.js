@@ -1,28 +1,14 @@
 const {GraphQLServer} = require('graphql-yoga')
 const {Prisma} = require('prisma-binding')
-
+const Query = require('./resolvers/Query')
+const Mutation = require('./resolvers/Mutation')
+const AuthPayload = require('./resolvers/AuthPayload')
 
 const resolvers = {
-    Query:{
-        info: () => `This is the API for the Forumala One App`,
-        feed: (root, args, context, info) => {
-            return context.db.query.drivers({}, info)
-        } ,
-    },
-    
-    Mutation:{
-       driver: (root, args, context, info) =>{
-           return context.db.mutation.createDriver({
-               data:{
-                   name: args.name,
-                   team: args.team,
-                   points: args.points,
-               },
-           }, info)
-       },
+    Query,
+    Mutation,
+    AuthPayload
 
-       
-    },
 }
 
 const server = new GraphQLServer({
