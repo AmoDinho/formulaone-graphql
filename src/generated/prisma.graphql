@@ -1,7 +1,11 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Fri Sep 07 2018 12:06:06 GMT+0200 (South Africa Standard Time)
+# timestamp: Mon Sep 17 2018 16:34:50 GMT+0200 (South Africa Standard Time)
 
 type AggregateDriver {
+  count: Int!
+}
+
+type AggregateFanBoost {
   count: Int!
 }
 
@@ -23,9 +27,11 @@ type Driver implements Node {
   team: String!
   points: Int!
   pictureURL: String!
+  country: String!
   podiums: Int!
   championshipWins: Int!
   postedBy(where: UserWhereInput): User
+  boosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost!]
 }
 
 """A connection to a list of items."""
@@ -43,9 +49,11 @@ input DriverCreateInput {
   team: String!
   points: Int!
   pictureURL: String!
+  country: String!
   podiums: Int!
   championshipWins: Int!
   postedBy: UserCreateOneWithoutDriversInput
+  boosts: FanBoostCreateManyWithoutDriverInput
 }
 
 input DriverCreateManyWithoutPostedByInput {
@@ -53,13 +61,31 @@ input DriverCreateManyWithoutPostedByInput {
   connect: [DriverWhereUniqueInput!]
 }
 
+input DriverCreateOneWithoutBoostsInput {
+  create: DriverCreateWithoutBoostsInput
+  connect: DriverWhereUniqueInput
+}
+
+input DriverCreateWithoutBoostsInput {
+  name: String!
+  team: String!
+  points: Int!
+  pictureURL: String!
+  country: String!
+  podiums: Int!
+  championshipWins: Int!
+  postedBy: UserCreateOneWithoutDriversInput
+}
+
 input DriverCreateWithoutPostedByInput {
   name: String!
   team: String!
   points: Int!
   pictureURL: String!
+  country: String!
   podiums: Int!
   championshipWins: Int!
+  boosts: FanBoostCreateManyWithoutDriverInput
 }
 
 """An edge in a connection."""
@@ -84,6 +110,8 @@ enum DriverOrderByInput {
   points_DESC
   pictureURL_ASC
   pictureURL_DESC
+  country_ASC
+  country_DESC
   podiums_ASC
   podiums_DESC
   championshipWins_ASC
@@ -99,6 +127,7 @@ type DriverPreviousValues {
   team: String!
   points: Int!
   pictureURL: String!
+  country: String!
   podiums: Int!
   championshipWins: Int!
 }
@@ -147,9 +176,11 @@ input DriverUpdateInput {
   team: String
   points: Int
   pictureURL: String
+  country: String
   podiums: Int
   championshipWins: Int
   postedBy: UserUpdateOneWithoutDriversInput
+  boosts: FanBoostUpdateManyWithoutDriverInput
 }
 
 input DriverUpdateManyWithoutPostedByInput {
@@ -161,18 +192,43 @@ input DriverUpdateManyWithoutPostedByInput {
   upsert: [DriverUpsertWithWhereUniqueWithoutPostedByInput!]
 }
 
+input DriverUpdateOneRequiredWithoutBoostsInput {
+  create: DriverCreateWithoutBoostsInput
+  connect: DriverWhereUniqueInput
+  update: DriverUpdateWithoutBoostsDataInput
+  upsert: DriverUpsertWithoutBoostsInput
+}
+
+input DriverUpdateWithoutBoostsDataInput {
+  name: String
+  team: String
+  points: Int
+  pictureURL: String
+  country: String
+  podiums: Int
+  championshipWins: Int
+  postedBy: UserUpdateOneWithoutDriversInput
+}
+
 input DriverUpdateWithoutPostedByDataInput {
   name: String
   team: String
   points: Int
   pictureURL: String
+  country: String
   podiums: Int
   championshipWins: Int
+  boosts: FanBoostUpdateManyWithoutDriverInput
 }
 
 input DriverUpdateWithWhereUniqueWithoutPostedByInput {
   where: DriverWhereUniqueInput!
   data: DriverUpdateWithoutPostedByDataInput!
+}
+
+input DriverUpsertWithoutBoostsInput {
+  update: DriverUpdateWithoutBoostsDataInput!
+  create: DriverCreateWithoutBoostsInput!
 }
 
 input DriverUpsertWithWhereUniqueWithoutPostedByInput {
@@ -394,6 +450,46 @@ input DriverWhereInput {
 
   """All values not ending with the given string."""
   pictureURL_not_ends_with: String
+  country: String
+
+  """All values that are not equal to given value."""
+  country_not: String
+
+  """All values that are contained in given list."""
+  country_in: [String!]
+
+  """All values that are not contained in given list."""
+  country_not_in: [String!]
+
+  """All values less than the given value."""
+  country_lt: String
+
+  """All values less than or equal the given value."""
+  country_lte: String
+
+  """All values greater than the given value."""
+  country_gt: String
+
+  """All values greater than or equal the given value."""
+  country_gte: String
+
+  """All values containing the given string."""
+  country_contains: String
+
+  """All values not containing the given string."""
+  country_not_contains: String
+
+  """All values starting with the given string."""
+  country_starts_with: String
+
+  """All values not starting with the given string."""
+  country_not_starts_with: String
+
+  """All values ending with the given string."""
+  country_ends_with: String
+
+  """All values not ending with the given string."""
+  country_not_ends_with: String
   podiums: Int
 
   """All values that are not equal to given value."""
@@ -439,9 +535,222 @@ input DriverWhereInput {
   """All values greater than or equal the given value."""
   championshipWins_gte: Int
   postedBy: UserWhereInput
+  boosts_every: FanBoostWhereInput
+  boosts_some: FanBoostWhereInput
+  boosts_none: FanBoostWhereInput
 }
 
 input DriverWhereUniqueInput {
+  id: ID
+}
+
+type FanBoost implements Node {
+  id: ID!
+  driver(where: DriverWhereInput): Driver!
+  user(where: UserWhereInput): User!
+}
+
+"""A connection to a list of items."""
+type FanBoostConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FanBoostEdge]!
+  aggregate: AggregateFanBoost!
+}
+
+input FanBoostCreateInput {
+  driver: DriverCreateOneWithoutBoostsInput!
+  user: UserCreateOneWithoutBoostsInput!
+}
+
+input FanBoostCreateManyWithoutDriverInput {
+  create: [FanBoostCreateWithoutDriverInput!]
+  connect: [FanBoostWhereUniqueInput!]
+}
+
+input FanBoostCreateManyWithoutUserInput {
+  create: [FanBoostCreateWithoutUserInput!]
+  connect: [FanBoostWhereUniqueInput!]
+}
+
+input FanBoostCreateWithoutDriverInput {
+  user: UserCreateOneWithoutBoostsInput!
+}
+
+input FanBoostCreateWithoutUserInput {
+  driver: DriverCreateOneWithoutBoostsInput!
+}
+
+"""An edge in a connection."""
+type FanBoostEdge {
+  """The item at the end of the edge."""
+  node: FanBoost!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FanBoostOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type FanBoostPreviousValues {
+  id: ID!
+}
+
+type FanBoostSubscriptionPayload {
+  mutation: MutationType!
+  node: FanBoost
+  updatedFields: [String!]
+  previousValues: FanBoostPreviousValues
+}
+
+input FanBoostSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FanBoostSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FanBoostSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FanBoostSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FanBoostWhereInput
+}
+
+input FanBoostUpdateInput {
+  driver: DriverUpdateOneRequiredWithoutBoostsInput
+  user: UserUpdateOneRequiredWithoutBoostsInput
+}
+
+input FanBoostUpdateManyWithoutDriverInput {
+  create: [FanBoostCreateWithoutDriverInput!]
+  connect: [FanBoostWhereUniqueInput!]
+  disconnect: [FanBoostWhereUniqueInput!]
+  delete: [FanBoostWhereUniqueInput!]
+  update: [FanBoostUpdateWithWhereUniqueWithoutDriverInput!]
+  upsert: [FanBoostUpsertWithWhereUniqueWithoutDriverInput!]
+}
+
+input FanBoostUpdateManyWithoutUserInput {
+  create: [FanBoostCreateWithoutUserInput!]
+  connect: [FanBoostWhereUniqueInput!]
+  disconnect: [FanBoostWhereUniqueInput!]
+  delete: [FanBoostWhereUniqueInput!]
+  update: [FanBoostUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [FanBoostUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input FanBoostUpdateWithoutDriverDataInput {
+  user: UserUpdateOneRequiredWithoutBoostsInput
+}
+
+input FanBoostUpdateWithoutUserDataInput {
+  driver: DriverUpdateOneRequiredWithoutBoostsInput
+}
+
+input FanBoostUpdateWithWhereUniqueWithoutDriverInput {
+  where: FanBoostWhereUniqueInput!
+  data: FanBoostUpdateWithoutDriverDataInput!
+}
+
+input FanBoostUpdateWithWhereUniqueWithoutUserInput {
+  where: FanBoostWhereUniqueInput!
+  data: FanBoostUpdateWithoutUserDataInput!
+}
+
+input FanBoostUpsertWithWhereUniqueWithoutDriverInput {
+  where: FanBoostWhereUniqueInput!
+  update: FanBoostUpdateWithoutDriverDataInput!
+  create: FanBoostCreateWithoutDriverInput!
+}
+
+input FanBoostUpsertWithWhereUniqueWithoutUserInput {
+  where: FanBoostWhereUniqueInput!
+  update: FanBoostUpdateWithoutUserDataInput!
+  create: FanBoostCreateWithoutUserInput!
+}
+
+input FanBoostWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FanBoostWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FanBoostWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FanBoostWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  driver: DriverWhereInput
+  user: UserWhereInput
+}
+
+input FanBoostWhereUniqueInput {
   id: ID
 }
 
@@ -454,16 +763,22 @@ scalar Long
 type Mutation {
   createDriver(data: DriverCreateInput!): Driver!
   createUser(data: UserCreateInput!): User!
+  createFanBoost(data: FanBoostCreateInput!): FanBoost!
   updateDriver(data: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateFanBoost(data: FanBoostUpdateInput!, where: FanBoostWhereUniqueInput!): FanBoost
   deleteDriver(where: DriverWhereUniqueInput!): Driver
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteFanBoost(where: FanBoostWhereUniqueInput!): FanBoost
   upsertDriver(where: DriverWhereUniqueInput!, create: DriverCreateInput!, update: DriverUpdateInput!): Driver!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertFanBoost(where: FanBoostWhereUniqueInput!, create: FanBoostCreateInput!, update: FanBoostUpdateInput!): FanBoost!
   updateManyDrivers(data: DriverUpdateInput!, where: DriverWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyFanBoosts(data: FanBoostUpdateInput!, where: FanBoostWhereInput): BatchPayload!
   deleteManyDrivers(where: DriverWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyFanBoosts(where: FanBoostWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -496,10 +811,13 @@ type PageInfo {
 type Query {
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  fanBoosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost]!
   driver(where: DriverWhereUniqueInput!): Driver
   user(where: UserWhereUniqueInput!): User
+  fanBoost(where: FanBoostWhereUniqueInput!): FanBoost
   driversConnection(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DriverConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  fanBoostsConnection(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FanBoostConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -511,6 +829,7 @@ type Query {
 type Subscription {
   driver(where: DriverSubscriptionWhereInput): DriverSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  fanBoost(where: FanBoostSubscriptionWhereInput): FanBoostSubscriptionPayload
 }
 
 type User implements Node {
@@ -519,6 +838,7 @@ type User implements Node {
   email: String!
   password: String!
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver!]
+  boosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost!]
 }
 
 """A connection to a list of items."""
@@ -536,6 +856,12 @@ input UserCreateInput {
   email: String!
   password: String!
   drivers: DriverCreateManyWithoutPostedByInput
+  boosts: FanBoostCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutBoostsInput {
+  create: UserCreateWithoutBoostsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutDriversInput {
@@ -543,10 +869,18 @@ input UserCreateOneWithoutDriversInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutBoostsInput {
+  name: String!
+  email: String!
+  password: String!
+  drivers: DriverCreateManyWithoutPostedByInput
+}
+
 input UserCreateWithoutDriversInput {
   name: String!
   email: String!
   password: String!
+  boosts: FanBoostCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -624,6 +958,14 @@ input UserUpdateInput {
   email: String
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
+  boosts: FanBoostUpdateManyWithoutUserInput
+}
+
+input UserUpdateOneRequiredWithoutBoostsInput {
+  create: UserCreateWithoutBoostsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutBoostsDataInput
+  upsert: UserUpsertWithoutBoostsInput
 }
 
 input UserUpdateOneWithoutDriversInput {
@@ -635,10 +977,23 @@ input UserUpdateOneWithoutDriversInput {
   upsert: UserUpsertWithoutDriversInput
 }
 
+input UserUpdateWithoutBoostsDataInput {
+  name: String
+  email: String
+  password: String
+  drivers: DriverUpdateManyWithoutPostedByInput
+}
+
 input UserUpdateWithoutDriversDataInput {
   name: String
   email: String
   password: String
+  boosts: FanBoostUpdateManyWithoutUserInput
+}
+
+input UserUpsertWithoutBoostsInput {
+  update: UserUpdateWithoutBoostsDataInput!
+  create: UserCreateWithoutBoostsInput!
 }
 
 input UserUpsertWithoutDriversInput {
@@ -818,6 +1173,9 @@ input UserWhereInput {
   drivers_every: DriverWhereInput
   drivers_some: DriverWhereInput
   drivers_none: DriverWhereInput
+  boosts_every: FanBoostWhereInput
+  boosts_some: FanBoostWhereInput
+  boosts_none: FanBoostWhereInput
 }
 
 input UserWhereUniqueInput {

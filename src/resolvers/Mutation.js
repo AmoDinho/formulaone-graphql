@@ -61,8 +61,31 @@ function driver(parent, args, context, info){
     )
 }
 
+async function boost(parent, args, context, info){
+    const userId = getUserId(context)
+
+    const driverExists = await context.db.exists.FanBoost({
+        user: {id: userId},
+        driver: {id: args.driverId},
+    })
+    if (driverExists){
+        throw new Error(`Already voted for Driver: ${args.driverId}`)
+    }
+
+    return context.db.mutation.createBoost(
+        {
+            data: {
+                user: {connect: {id: userId}},
+                driver: {connect: {id: args.driverId}},
+            },
+        },
+        info,
+    )
+}
+
 module.exports = {
     signup,
     login,
     driver,
+    boost,
 }

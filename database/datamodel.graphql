@@ -21,7 +21,7 @@ type User {
     boosts: [FanBoost!]!
 }
 
-type FanBoost{
+type FanBoost {
     id: ID! @unique
     driver: Driver!
     user: User!
