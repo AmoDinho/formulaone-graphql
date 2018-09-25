@@ -11,9 +11,8 @@ const newDriver = {
 
 
 function newBoostSubcribe (parent, args, context, info){
-    return context.db.subscription.boost(
-        {where : {mutation_in: ['CREATED']}
-        },
+    return context.db.subscription.fanBoost(
+        {where : {mutation_in: ['CREATED']}},
         info,
     )
 }

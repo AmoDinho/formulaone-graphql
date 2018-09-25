@@ -55,6 +55,7 @@ function driver(parent, args, context, info){
                 podiums: args.podiums,
                 championshipWins: args.championshipWins,
                 postedBy: {connect: {id: userId}},
+                country: args.country,
             },
         },
         info,
@@ -72,7 +73,7 @@ async function boost(parent, args, context, info){
         throw new Error(`Already voted for Driver: ${args.driverId}`)
     }
 
-    return context.db.mutation.createBoost(
+    return context.db.mutation.createFanBoost(
         {
             data: {
                 user: {connect: {id: userId}},
