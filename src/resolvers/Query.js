@@ -1,5 +1,13 @@
 function feed (root, args, context, info)  {
-    return context.db.query.drivers({}, info)
+    const where = args.filter
+       ? {
+           OR: [
+               {name_contains: args.filter},
+               {team_contains: args.filter},
+           ],
+       }
+       : {}
+    return context.db.query.drivers({where}, info)
 }
 
 module.exports ={
