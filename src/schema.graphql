@@ -1,8 +1,8 @@
-# import Driver, DriverSubscriptionPayload, FanBoost, FanBoostSubscriptionPayload from "./generated/prisma.graphql"
+# import Driver, DriverSubscriptionPayload, FanBoost, FanBoostSubscriptionPayload, DriverOrderByInput from "./generated/prisma.graphql"
 
 type Query {
     info: String!
-    feed(filter: String, skip: Int, first: Int): [Driver]!
+    feed(filter: String, skip: Int, first: Int, orderBy:DriverOrderByInput): [Driver]!
     
 }
 
