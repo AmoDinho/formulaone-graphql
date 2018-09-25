@@ -7,7 +7,7 @@ function feed (root, args, context, info)  {
            ],
        }
        : {}
-    return context.db.query.drivers({where}, info)
+    return context.db.query.drivers({where, skip:args.skip, first: args.first}, info)
 }
 
 module.exports ={

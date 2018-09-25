@@ -2,7 +2,7 @@
 
 type Query {
     info: String!
-    feed(filter: String): [Driver]!
+    feed(filter: String, skip: Int, first: Int): [Driver]!
     
 }
 
