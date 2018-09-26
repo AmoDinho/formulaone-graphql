@@ -60,5 +60,17 @@ Make the following queries for sorting, filtering and pagination:
 
 
 ```
+query{
+  feed
+  {count
+    drivers{
+      name
+      team
+      country
+          }
+    
+    
+  }
+}
 ```
 
