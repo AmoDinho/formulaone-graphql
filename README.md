@@ -50,7 +50,7 @@ Make the following queries for sorting, filtering and pagination:
 
 ```
 {
-  feed(orderBy: createdAT_ASC){
+  feed(orderBy: createdAt_ASC){
    id
     name
     team
