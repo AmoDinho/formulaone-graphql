@@ -1,76 +1,35 @@
 # formulaone-graphql
-This is a fullstack GraphQL Formula One app
+This is the backend for the  fullstack GraphQL Formula One app. It uses Prisma as the Database layer.
 
-Once you have deployed your Prisma Service head over to the http endpoint and add your prisma token. 
-
-## Instructions
-
-In this part we needed to configure the resolvers to use Prisma Bindings. 
-
-We created an Application layer and databaser layer.
-
-However we have a problem when running ```prisma deploy```. Nothing gets generated. So you need run each of the deploy hooks via the terminal.
-
-Once that is done in one terminal run: ```node src/index.js```
-
-then in the another one run: ```graphql playground```
-
-------------------------------
-
-
-
-token :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjamxydm9qcGE4eXJ6MGIxMmlqbnk2cHdoIiwiaWF0IjoxNTM2MzE3MzQ1fQ.tR67_m5ggWqwJO5G9UqmIx9YVch74RaTIqYQ4Yt_j1o"
-
-Make the following queries for sorting, filtering and pagination:
+## App Structure
+```
+├── Server
+   ├── Database
+   ├── src
+      ├── generated
+      ├── resolvers
+      ├── index.js
+      ├── schema.graphql
+      ├── utils.js
+   ├── .graphqlconfig.yml
 
 ```
-{
-  feed(filter:"Kimi"){
-    id
-    team
-    name
-  }
-}
-``` 
+ 
 
+## Setup Instructions
+
+In one terminal run :
 
 ```
-{
-  feed(
-    first: 1
-    skip: 1
-  ){
-    id
-    name
-    team
-  }
-}
-```
-
+$ yarn run server
 
 ```
-{
-  feed(orderBy: createdAt_ASC){
-   id
-    name
-    team
-  }
-}
-```
 
+This will start the appilcation server. 
+
+Then to start the database server run:
 
 ```
-query{
-  feed
-  {count
-    drivers{
-      name
-      team
-      country
-          }
-    
-    
-  }
-}
-```
+$ yarn run playground
 
+```
