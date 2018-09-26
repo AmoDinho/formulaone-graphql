@@ -2,7 +2,7 @@
 
 type Query {
     info: String!
-    feed(filter: String, skip: Int, first: Int, orderBy: DriverOrderByInput): [Driver]!
+    feed(filter: String, skip: Int, first: Int, orderBy: DriverOrderByInput): Feed!
     
 }
 
@@ -25,6 +25,10 @@ type User {
     drivers: [Driver!]!
 }
 
+type Feed {
+    drivers: [Driver!]!
+    count: Int!
+}
 
 type Subscription {
     newDriver: DriverSubscriptionPayload
