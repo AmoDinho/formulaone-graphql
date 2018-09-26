@@ -1,0 +1,28 @@
+type Driver {
+    id: ID! @unique
+    createdAt: DateTime!
+    name: String!
+    team: String!
+    points: Int!
+    pictureURL: String!
+    country: String!
+    podiums: Int!
+    championshipWins:Int!
+    postedBy: User
+    boosts: [FanBoost!]!
+}
+
+type User {
+    id: ID! @unique
+    name:String!
+    email: String! @unique
+    password: String!
+    drivers: [Driver!]!
+    boosts: [FanBoost!]!
+}
+
+type FanBoost {
+    id: ID! @unique
+    driver: Driver!
+    user: User!
+}

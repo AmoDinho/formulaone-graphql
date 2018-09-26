@@ -1,0 +1,17 @@
+
+#HTTP ENDPOINT
+endpoint: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
+
+#point to file that has datamodel
+datamodel: datamodel.graphql
+
+# deploy hook
+hooks:
+  post-deploy:
+    - graphql get-schema --project database 
+    - graphql prepare
+
+## Your access to an API
+secret: mysecret123
+
+

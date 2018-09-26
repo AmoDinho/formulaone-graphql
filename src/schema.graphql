@@ -1,0 +1,37 @@
+# import Driver, DriverSubscriptionPayload, FanBoost, FanBoostSubscriptionPayload, DriverOrderByInput from "./generated/prisma.graphql"
+
+type Query {
+    info: String!
+    feed(filter: String, skip: Int, first: Int, orderBy: DriverOrderByInput): Feed!
+    
+}
+
+type Mutation {
+    driver(name: String!, team: String!, points: Int!, pictureURL: String!, podiums: Int!, championshipWins:Int!, country:String!): Driver!
+    signup(email: String!, password:String!,name:String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
+    boost(driverId: ID!): FanBoost
+}
+
+type AuthPayload{
+    token: String
+    user: User
+}
+
+type User {
+    id: ID!
+    name:String!
+    email: String!
+    drivers: [Driver!]!
+}
+
+type Feed {
+    drivers: [Driver!]!
+    count: Int!
+}
+
+type Subscription {
+    newDriver: DriverSubscriptionPayload
+    newBoost: FanBoostSubscriptionPayload
+}
+
