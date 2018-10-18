@@ -1,6 +1,6 @@
 
 #HTTP ENDPOINT
-endpoint: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
+endpoint: process.env.PRISMA_ENDPOINT
 
 #point to file that has datamodel
 datamodel: datamodel.graphql
@@ -12,6 +12,6 @@ hooks:
     - graphql prepare
 
 ## Your access to an API
-secret: mysecret123
+secret: process.env.APP_SECRET
 
 
