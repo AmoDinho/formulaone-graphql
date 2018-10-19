@@ -12,6 +12,6 @@ hooks:
     - graphql prepare
 
 ## Your access to an API
-secret: process.env.APP_SECRET
+secret: ${env:APP_SECRET}
 
 

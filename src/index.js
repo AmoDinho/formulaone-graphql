@@ -5,6 +5,7 @@ const Mutation = require('./resolvers/Mutation')
 const AuthPayload = require('./resolvers/AuthPayload')
 const Subscription = require('./resolvers/Subscription')
 const Feed = require('./resolvers/Feed')
+require('dotenv').config({ path: '.env' });
 
 const resolvers = {
     Query,
@@ -15,6 +16,9 @@ const resolvers = {
 
 }
 
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000
+
+
 const server = new GraphQLServer({
     typeDefs: './src/schema.graphql',
     resolvers,
@@ -24,10 +28,10 @@ const server = new GraphQLServer({
             typeDefs: 'src/generated/prisma.graphql',
             endpoint: process.env.PRISMA_ENDPOINT,
             secret: process.env.PRISMA_SECRET,
-            debug: true,
+            debug: process.env.NODE_ENV==="development" ? true:false,
         }),
     }),
 
 })
 
-server.start(() => console.log(`Server is running on http://localhost:4000`))
+server.start({port: PORT}, () => console.log(`Server is running on http://localhost:${PORT}`))
