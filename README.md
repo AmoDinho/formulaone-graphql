@@ -1,4 +1,4 @@
-# Formula One App
+# Formula One App 🏎
 This is the backend for a fullstack GraphQL Formula One app. It uses Prisma as the Database layer.
 
 The API supports the following queries:
