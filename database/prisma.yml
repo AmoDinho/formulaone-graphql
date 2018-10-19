@@ -1,6 +1,6 @@
 
 #HTTP ENDPOINT
-endpoint: process.env.PRISMA_ENDPOINT
+endpoint: ${env:PRISMA_ENDPOINT}
 
 #point to file that has datamodel
 datamodel: datamodel.graphql
