@@ -64,11 +64,15 @@ This project uses yarn which can be downloaded from [here](https://yarnpkg.com/e
 
 ## Setup Instructions
 
+First clone the repo:
+```
+$ git clone https://github.com/AmoDinho/formulaone-graphql.git
+```
 
-First install the dependancies :
+Then install the dependancies :
 
 ```
-#yarn 
+ 
 $ yarn install
 
 
