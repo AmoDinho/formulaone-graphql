@@ -1,5 +1,5 @@
 # formulaone-graphql
-This is the backend for the  fullstack GraphQL Formula One app. It uses Prisma as the Database layer.
+This is the backend for a fullstack GraphQL Formula One app. It uses Prisma as the Database layer.
 
 The API supports the following queries:
 
@@ -42,7 +42,10 @@ The API supports the following mutations:
 
 
 
-You can jump over to the front-end repo [here](https://github.com/AmoDinho/formulaone-graphql-client)
+You can jump over to the front-end repo [here](https://github.com/AmoDinho/formulaone-graphql-client).
+
+This project uses yarn which can be downloaded from [here](https://yarnpkg.com/en/).
+
 
 ## App Structure
 ```
