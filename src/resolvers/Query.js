@@ -1,3 +1,5 @@
+const {forwardTo} = require('prisma-binding');
+
 async function feed (root, args, context, info)  {
     const where = args.filter
        ? {
@@ -29,6 +31,11 @@ async function feed (root, args, context, info)  {
    }
 }
 
+function driver(parent, args,context,info){
+    return context.db.query.driver({where:{id: args.id}},info)
+}
+
 module.exports ={
+    driver,
     feed,
 }
