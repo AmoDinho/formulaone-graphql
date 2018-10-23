@@ -11,6 +11,8 @@ type Mutation {
     signup(email: String!, password:String!,name:String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     boost(driverId: ID!): FanBoost
+    updateDriver(id:ID!,name: String!, team: String!, points: Int!, pictureURL: String!, podiums: Int!, championshipWins:Int!, country:String!): Driver!
+    deleteDriver(id:ID!): Driver
 }
 
 type AuthPayload{

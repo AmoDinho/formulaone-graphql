@@ -84,9 +84,35 @@ async function boost(parent, args, context, info){
     )
 }
 
+async function updateDriver(parent,args,context,info){
+    //const userId = getUserId(context);
+    
+    const updates = {...args};
+
+    delete updates.id;
+
+    return context.db.mutation.updateDriver(
+        {
+            data:updates,
+            where: {
+                id:args.id                
+            },
+        },
+        info
+    );
+};
+
+async function deleteDriver(parnet,args, context, info){
+       const where = {id: args.id};
+
+    
+        return context.db.mutation.deleteDriver({where},info)
+}
+
 module.exports = {
     signup,
     login,
     driver,
     boost,
+    updateDriver,
 }
