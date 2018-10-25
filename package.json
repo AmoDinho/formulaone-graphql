@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon -e js, graphql -x node --watch src/index.js ",
+    "server": "nodemon -e js, graphql -x node src/index.js ",
     "playground": "nodemon -e js,graphql -x  graphql playground"
   },
   "dependencies": {
