@@ -84,7 +84,7 @@ async function boost(parent, args, context, info){
     )
 }
 
-async function updateDriver(parent,args,context,info){
+ function updateDriver(parent,args,context,info){
     //const userId = getUserId(context);
     
     const updates = {...args};
@@ -103,10 +103,18 @@ async function updateDriver(parent,args,context,info){
 };
 
 async function deleteDriver(parnet,args, context, info){
+
+    //Get the driver
+    //look at the boost function
+
+    //get the drivers boosts
+
+    //Then delete the driver 
        const where = {id: args.id};
 
+      
+        return context.db.mutation.deleteDriver({where},info) && context.db.mutation.deleteFanBoost({where},info) 
     
-        return context.db.mutation.deleteDriver({where},info)
 }
 
 module.exports = {
@@ -115,4 +123,5 @@ module.exports = {
     driver,
     boost,
     updateDriver,
+    deleteDriver
 }
