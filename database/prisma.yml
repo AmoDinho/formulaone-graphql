@@ -11,7 +11,7 @@ hooks:
     - graphql get-schema --project database 
     - graphql prepare
 
-## Your access to an API
-secret: ${env:APP_SECRET}
+## Your access to the API
+secret: ${env:PRISMA_SECRET}
 
 

@@ -103,7 +103,7 @@ async function boost(parent, args, context, info){
 };
 
 async function deleteDriver(parnet,args, context, info){
-
+    const userId = getUserId(context);
     //Get the driver
     //look at the boost function
 
@@ -111,9 +111,21 @@ async function deleteDriver(parnet,args, context, info){
 
     //Then delete the driver 
        const where = {id: args.id};
+   
+        const boosts = await context.db.exists.FanBoost({
+            
+            user: {id: userId},
+            driver: {id: args.driverId},
 
+        })
+
+
+
+        if (!boosts){
+            throw new Error("this driver does not exist");
+        }
       
-        return context.db.mutation.deleteDriver({where},info) && context.db.mutation.deleteFanBoost({where},info) 
+        return context.db.mutation.deleteDriver({where},info) 
     
 }
 

@@ -9,7 +9,7 @@ type Driver {
     podiums: Int!
     championshipWins:Int!
     postedBy: User
-    boosts: [FanBoost!]!
+    boosts: [FanBoost!]! @relation(name:"FanBoost",onDelete:CASCADE)
 }
 
 type User {
@@ -23,6 +23,6 @@ type User {
 
 type FanBoost {
     id: ID! @unique
-    driver: Driver!
+    driver: Driver! @relation(name:"FanBoost",onDelete:CASCADE)
     user: User!
 }

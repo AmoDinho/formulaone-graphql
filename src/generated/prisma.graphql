@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Mon Sep 17 2018 16:34:50 GMT+0200 (South Africa Standard Time)
+# timestamp: Tue Oct 30 2018 17:30:48 GMT+0200 (South Africa Standard Time)
 
 type AggregateDriver {
   count: Int!
@@ -30,7 +30,7 @@ type Driver implements Node {
   country: String!
   podiums: Int!
   championshipWins: Int!
-  postedBy(where: UserWhereInput): User
+  postedBy: User
   boosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost!]
 }
 
@@ -181,6 +181,16 @@ input DriverUpdateInput {
   championshipWins: Int
   postedBy: UserUpdateOneWithoutDriversInput
   boosts: FanBoostUpdateManyWithoutDriverInput
+}
+
+input DriverUpdateManyMutationInput {
+  name: String
+  team: String
+  points: Int
+  pictureURL: String
+  country: String
+  podiums: Int
+  championshipWins: Int
 }
 
 input DriverUpdateManyWithoutPostedByInput {
@@ -546,8 +556,8 @@ input DriverWhereUniqueInput {
 
 type FanBoost implements Node {
   id: ID!
-  driver(where: DriverWhereInput): Driver!
-  user(where: UserWhereInput): User!
+  driver: Driver!
+  user: User!
 }
 
 """A connection to a list of items."""
@@ -773,9 +783,8 @@ type Mutation {
   upsertDriver(where: DriverWhereUniqueInput!, create: DriverCreateInput!, update: DriverUpdateInput!): Driver!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertFanBoost(where: FanBoostWhereUniqueInput!, create: FanBoostCreateInput!, update: FanBoostUpdateInput!): FanBoost!
-  updateManyDrivers(data: DriverUpdateInput!, where: DriverWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyFanBoosts(data: FanBoostUpdateInput!, where: FanBoostWhereInput): BatchPayload!
+  updateManyDrivers(data: DriverUpdateManyMutationInput!, where: DriverWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyDrivers(where: DriverWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyFanBoosts(where: FanBoostWhereInput): BatchPayload!
@@ -959,6 +968,12 @@ input UserUpdateInput {
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
   boosts: FanBoostUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
 }
 
 input UserUpdateOneRequiredWithoutBoostsInput {
