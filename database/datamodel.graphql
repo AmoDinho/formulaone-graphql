@@ -16,6 +16,8 @@ type User {
     id: ID! @unique
     name:String!
     email: String! @unique
+    resetToken: String!
+    resetTokenExpiry: Float
     password: String!
     drivers: [Driver!]!
     boosts: [FanBoost!]!
