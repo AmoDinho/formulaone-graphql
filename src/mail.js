@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+/* eslint-disable no-param-reassign */
 const transport = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
     port: process.env.MAIL_PORT,
