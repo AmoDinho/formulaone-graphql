@@ -1,6 +1,7 @@
 
 #HTTP ENDPOINT
-endpoint: ${env:PROD_ENDPOINT}
+endpoint: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
+
 
 #point to file that has datamodel
 datamodel: datamodel.graphql

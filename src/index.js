@@ -26,7 +26,7 @@ const server = new GraphQLServer({
         ...req,
         db: new Prisma({
             typeDefs: 'src/generated/prisma.graphql',
-            endpoint: process.env.PROD_ENDPOINT,
+            endpoint: 'PRISMA_ENDPOINT="https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev'            
             secret: process.env.PRISMA_SECRET,
             debug: process.env.NODE_ENV==="development" ? true:false,
         }),
