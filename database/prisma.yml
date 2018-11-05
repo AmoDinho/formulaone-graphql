@@ -1,6 +1,8 @@
 
 #HTTP ENDPOINT
-endpoint: https://fanboost-1e87623432.herokuapp.com/fanBoost/dev
+#endpoint: https://fanboost-1e87623432.herokuapp.com/formulaone-graphql/dev/
+endpoint: https://fan-boost-prod-839190c9f2.herokuapp.com/fan-boost-prod/dev
+
 
 
 #point to file that has datamodel
