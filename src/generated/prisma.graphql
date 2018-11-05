@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Tue Oct 30 2018 17:30:48 GMT+0200 (South Africa Standard Time)
+# timestamp: Mon Nov 05 2018 15:15:24 GMT+0200 (South Africa Standard Time)
 
 type AggregateDriver {
   count: Int!
@@ -845,6 +845,8 @@ type User implements Node {
   id: ID!
   name: String!
   email: String!
+  resetToken: String
+  resetTokenExpiry: Float
   password: String!
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver!]
   boosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost!]
@@ -863,6 +865,8 @@ type UserConnection {
 input UserCreateInput {
   name: String!
   email: String!
+  resetToken: String
+  resetTokenExpiry: Float
   password: String!
   drivers: DriverCreateManyWithoutPostedByInput
   boosts: FanBoostCreateManyWithoutUserInput
@@ -881,6 +885,8 @@ input UserCreateOneWithoutDriversInput {
 input UserCreateWithoutBoostsInput {
   name: String!
   email: String!
+  resetToken: String
+  resetTokenExpiry: Float
   password: String!
   drivers: DriverCreateManyWithoutPostedByInput
 }
@@ -888,6 +894,8 @@ input UserCreateWithoutBoostsInput {
 input UserCreateWithoutDriversInput {
   name: String!
   email: String!
+  resetToken: String
+  resetTokenExpiry: Float
   password: String!
   boosts: FanBoostCreateManyWithoutUserInput
 }
@@ -908,6 +916,10 @@ enum UserOrderByInput {
   name_DESC
   email_ASC
   email_DESC
+  resetToken_ASC
+  resetToken_DESC
+  resetTokenExpiry_ASC
+  resetTokenExpiry_DESC
   password_ASC
   password_DESC
   updatedAt_ASC
@@ -920,6 +932,8 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
+  resetToken: String
+  resetTokenExpiry: Float
   password: String!
 }
 
@@ -965,6 +979,8 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   name: String
   email: String
+  resetToken: String
+  resetTokenExpiry: Float
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
   boosts: FanBoostUpdateManyWithoutUserInput
@@ -973,6 +989,8 @@ input UserUpdateInput {
 input UserUpdateManyMutationInput {
   name: String
   email: String
+  resetToken: String
+  resetTokenExpiry: Float
   password: String
 }
 
@@ -995,6 +1013,8 @@ input UserUpdateOneWithoutDriversInput {
 input UserUpdateWithoutBoostsDataInput {
   name: String
   email: String
+  resetToken: String
+  resetTokenExpiry: Float
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
 }
@@ -1002,6 +1022,8 @@ input UserUpdateWithoutBoostsDataInput {
 input UserUpdateWithoutDriversDataInput {
   name: String
   email: String
+  resetToken: String
+  resetTokenExpiry: Float
   password: String
   boosts: FanBoostUpdateManyWithoutUserInput
 }
@@ -1145,6 +1167,68 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   email_not_ends_with: String
+  resetToken: String
+
+  """All values that are not equal to given value."""
+  resetToken_not: String
+
+  """All values that are contained in given list."""
+  resetToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  resetToken_not_in: [String!]
+
+  """All values less than the given value."""
+  resetToken_lt: String
+
+  """All values less than or equal the given value."""
+  resetToken_lte: String
+
+  """All values greater than the given value."""
+  resetToken_gt: String
+
+  """All values greater than or equal the given value."""
+  resetToken_gte: String
+
+  """All values containing the given string."""
+  resetToken_contains: String
+
+  """All values not containing the given string."""
+  resetToken_not_contains: String
+
+  """All values starting with the given string."""
+  resetToken_starts_with: String
+
+  """All values not starting with the given string."""
+  resetToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  resetToken_ends_with: String
+
+  """All values not ending with the given string."""
+  resetToken_not_ends_with: String
+  resetTokenExpiry: Float
+
+  """All values that are not equal to given value."""
+  resetTokenExpiry_not: Float
+
+  """All values that are contained in given list."""
+  resetTokenExpiry_in: [Float!]
+
+  """All values that are not contained in given list."""
+  resetTokenExpiry_not_in: [Float!]
+
+  """All values less than the given value."""
+  resetTokenExpiry_lt: Float
+
+  """All values less than or equal the given value."""
+  resetTokenExpiry_lte: Float
+
+  """All values greater than the given value."""
+  resetTokenExpiry_gt: Float
+
+  """All values greater than or equal the given value."""
+  resetTokenExpiry_gte: Float
   password: String
 
   """All values that are not equal to given value."""
