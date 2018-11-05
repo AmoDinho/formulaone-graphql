@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines":{
+    "node": "6.11.1",
+    "yarn": "0.27.5"
+  },
   "scripts": {
     "server": "nodemon -e js, graphql -x node src/index.js ",
-    "playground": "nodemon -e js,graphql -x  graphql playground"
+    "playground": "nodemon -e js,graphql -x  graphql playground",
+    "start": "nodemon -e js, graphql -x node src/index.js "
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
