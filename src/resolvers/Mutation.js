@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { getUserId} = require('../utils')
-
+const {randomBytes} = require('crypto')
+const {promisify} = require('util')
+const {transport, mailTemp} = require('../mail')
 
 async function signup(parent, args, context, info){
     //1 
@@ -129,11 +131,42 @@ async function deleteDriver(parnet,args, context, info){
     
 }
 
+
+async function requestReset(parent, args, context, info){
+    //check if the user exisits
+    const user = await context.db.query.user({where: {email:args.email}});
+    if (!user){
+        throw new Error(`No such user found with this email: ${args.email}`);
+    }
+   
+    const randomBytesPromisefied = promisify(randomBytes)
+    resetToken = (await randomBytesPromisefied(20)).toString('hex')
+    resetTokenExpiry = Date.now() + 3600000
+    const res = await context.db.mutation.updateUser({
+        where: {email: args.email},
+        data: {resetToken,resetTokenExpiry}
+    });
+
+    const mailRes = await transport.sendMail({
+        from: 'u14284783@tuks.co.za',
+        to: user.email,
+        subject: 'Your Password Reset Token',
+        html: mailTemp(`your password reset token is here! 
+        \n\n
+        <a href="${process.env.PRISMA_ENDPOINT}/reset?resetToken=${resetToken}">Click here to reset</a>`),
+    })
+
+    console.log(mailRes)
+    return {message:'Thanks'}
+
+}
+
 module.exports = {
     signup,
     login,
     driver,
     boost,
     updateDriver,
-    deleteDriver
+    deleteDriver,
+    requestReset
 }
