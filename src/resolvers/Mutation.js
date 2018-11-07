@@ -168,7 +168,7 @@ async function resetPassword(parent, args, context,info){
     console.log(args.password)
     console.log(args.confirmPassword)
     //verify that passwords to indeed match
-   if(args.password !== args.confirmPassord){
+   if(args.password !== args.confirmPassword){
        throw new Error("Your passwords do not match");
    }
 
@@ -187,7 +187,7 @@ async function resetPassword(parent, args, context,info){
    const password = await bcrypt.hash(args.password, 10)
 
    // save the passowrd and remove old resetToken fields
-   const updateUser = await ctx.db.mutation.updateUser({
+   const updateUser = await context.db.mutation.updateUser({
        where: {email:user.email},
        data: {
            password,
@@ -201,6 +201,37 @@ async function resetPassword(parent, args, context,info){
    return updateUser
 }
 
+async function deleteUser(parent, context, args,info ){
+    //lets check if the user exisist and has the password
+
+    const userId = getUserId(context)
+
+    const userExists = await context.db.exists.users({
+        
+        user: {id: userId},
+       
+    })
+     
+
+    if (!userExists){
+        throw new Error("You do not exisit")
+    }
+
+    const user = await context.db.query.users({
+        where:{id:userId}
+    })
+    
+    if(user.password !== args.password){
+        throw new Error("Incorrect password");
+    }
+
+   
+
+    return await context.db.mutation.deleteUser({
+        where: {id: userId}
+    })
+}
+
 module.exports = {
     signup,
     login,
@@ -209,5 +240,6 @@ module.exports = {
     updateDriver,
     deleteDriver,
     requestReset,
-    resetPassword
+    resetPassword,
+    deleteUser
 }
