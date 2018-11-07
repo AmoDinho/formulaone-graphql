@@ -147,18 +147,58 @@ async function requestReset(parent, args, context, info){
         data: {resetToken,resetTokenExpiry}
     });
 
-    const mailRes = await transport.sendMail({
+    const mailRes = await transport.sendEmail({
         from: 'u14284783@tuks.co.za',
         to: user.email,
         subject: 'Your Password Reset Token',
-        html: mailTemp(`your password reset token is here! 
+        TextBody: mailTemp(`your password reset token is here! 
         \n\n
-        <a href="${process.env.PRISMA_ENDPOINT}/reset?resetToken=${resetToken}">Click here to reset</a>`),
+        <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click here to reset</a>`),
+    }).then(response => {
+        console.log(response.message)
     })
 
     console.log(mailRes)
     return {message:'Thanks'}
 
+}
+
+
+async function resetPassword(parent, args, context,info){
+    console.log(args.password)
+    console.log(args.confirmPassword)
+    //verify that passwords to indeed match
+   if(args.password !== args.confirmPassord){
+       throw new Error("Your passwords do not match");
+   }
+
+   //verify if the reset token is valid and if it has expired
+   const [user] = await context.db.query.users({
+       where: {
+           resetToken: args.resetToken,
+           resetTokenExpiry_gte: Date.now() - 3600000,
+       },
+   });
+   if (!user){
+       throw new Error('This token might be invalid or expired')
+   }
+
+   //hash their new password
+   const password = await bcrypt.hash(args.password, 10)
+
+   // save the passowrd and remove old resetToken fields
+   const updateUser = await ctx.db.mutation.updateUser({
+       where: {email:user.email},
+       data: {
+           password,
+           resetToken: null,
+           resetTokenExpiry: null,
+       },
+   })
+   //Also give them a new JWT
+   const token = jwt.sign({userId: updateUser.id},process.env.APP_SECRET)
+   
+   return updateUser
 }
 
 module.exports = {
@@ -168,5 +208,6 @@ module.exports = {
     boost,
     updateDriver,
     deleteDriver,
-    requestReset
+    requestReset,
+    resetPassword
 }
