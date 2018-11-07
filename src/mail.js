@@ -1,11 +1,7 @@
-const nodemailer = require('nodemailer')
-const postmarkTransport = require('nodemailer-postmark-transport')
+const postmark = require('postmark')
 
-const transport = nodemailer.createTransport(postmarkTransport({
-	auth: {
-		apiKey: '2bf8257c-c345-4f43-b553-611a60c7b789'
-	}
-}))
+
+const transport = new postmark.ServerClient('2bf8257c-c345-4f43-b553-611a60c7b789')
 
 const mailTemp = text => `
   <div className="email" style="
