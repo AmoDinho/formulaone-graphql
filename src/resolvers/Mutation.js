@@ -54,6 +54,7 @@ function driver(parent, args, context, info){
                 team: args.team,
                 points: args.points,
                 pictureURL: args.pictureURL,
+                number: args.number,
                 podiums: args.podiums,
                 championshipWins: args.championshipWins,
                 postedBy: {connect: {id: userId}},

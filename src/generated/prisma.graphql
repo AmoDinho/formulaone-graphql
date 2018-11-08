@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Mon Nov 05 2018 15:15:24 GMT+0200 (South Africa Standard Time)
+# timestamp: Thu Nov 08 2018 13:17:50 GMT+0200 (South Africa Standard Time)
 
 type AggregateDriver {
   count: Int!
@@ -23,6 +23,7 @@ scalar DateTime
 type Driver implements Node {
   id: ID!
   createdAt: DateTime!
+  number: Int
   name: String!
   team: String!
   points: Int!
@@ -45,6 +46,7 @@ type DriverConnection {
 }
 
 input DriverCreateInput {
+  number: Int
   name: String!
   team: String!
   points: Int!
@@ -67,6 +69,7 @@ input DriverCreateOneWithoutBoostsInput {
 }
 
 input DriverCreateWithoutBoostsInput {
+  number: Int
   name: String!
   team: String!
   points: Int!
@@ -78,6 +81,7 @@ input DriverCreateWithoutBoostsInput {
 }
 
 input DriverCreateWithoutPostedByInput {
+  number: Int
   name: String!
   team: String!
   points: Int!
@@ -102,6 +106,8 @@ enum DriverOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  number_ASC
+  number_DESC
   name_ASC
   name_DESC
   team_ASC
@@ -123,6 +129,7 @@ enum DriverOrderByInput {
 type DriverPreviousValues {
   id: ID!
   createdAt: DateTime!
+  number: Int
   name: String!
   team: String!
   points: Int!
@@ -130,6 +137,327 @@ type DriverPreviousValues {
   country: String!
   podiums: Int!
   championshipWins: Int!
+}
+
+input DriverScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DriverScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DriverScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DriverScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  number: Int
+
+  """All values that are not equal to given value."""
+  number_not: Int
+
+  """All values that are contained in given list."""
+  number_in: [Int!]
+
+  """All values that are not contained in given list."""
+  number_not_in: [Int!]
+
+  """All values less than the given value."""
+  number_lt: Int
+
+  """All values less than or equal the given value."""
+  number_lte: Int
+
+  """All values greater than the given value."""
+  number_gt: Int
+
+  """All values greater than or equal the given value."""
+  number_gte: Int
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  team: String
+
+  """All values that are not equal to given value."""
+  team_not: String
+
+  """All values that are contained in given list."""
+  team_in: [String!]
+
+  """All values that are not contained in given list."""
+  team_not_in: [String!]
+
+  """All values less than the given value."""
+  team_lt: String
+
+  """All values less than or equal the given value."""
+  team_lte: String
+
+  """All values greater than the given value."""
+  team_gt: String
+
+  """All values greater than or equal the given value."""
+  team_gte: String
+
+  """All values containing the given string."""
+  team_contains: String
+
+  """All values not containing the given string."""
+  team_not_contains: String
+
+  """All values starting with the given string."""
+  team_starts_with: String
+
+  """All values not starting with the given string."""
+  team_not_starts_with: String
+
+  """All values ending with the given string."""
+  team_ends_with: String
+
+  """All values not ending with the given string."""
+  team_not_ends_with: String
+  points: Int
+
+  """All values that are not equal to given value."""
+  points_not: Int
+
+  """All values that are contained in given list."""
+  points_in: [Int!]
+
+  """All values that are not contained in given list."""
+  points_not_in: [Int!]
+
+  """All values less than the given value."""
+  points_lt: Int
+
+  """All values less than or equal the given value."""
+  points_lte: Int
+
+  """All values greater than the given value."""
+  points_gt: Int
+
+  """All values greater than or equal the given value."""
+  points_gte: Int
+  pictureURL: String
+
+  """All values that are not equal to given value."""
+  pictureURL_not: String
+
+  """All values that are contained in given list."""
+  pictureURL_in: [String!]
+
+  """All values that are not contained in given list."""
+  pictureURL_not_in: [String!]
+
+  """All values less than the given value."""
+  pictureURL_lt: String
+
+  """All values less than or equal the given value."""
+  pictureURL_lte: String
+
+  """All values greater than the given value."""
+  pictureURL_gt: String
+
+  """All values greater than or equal the given value."""
+  pictureURL_gte: String
+
+  """All values containing the given string."""
+  pictureURL_contains: String
+
+  """All values not containing the given string."""
+  pictureURL_not_contains: String
+
+  """All values starting with the given string."""
+  pictureURL_starts_with: String
+
+  """All values not starting with the given string."""
+  pictureURL_not_starts_with: String
+
+  """All values ending with the given string."""
+  pictureURL_ends_with: String
+
+  """All values not ending with the given string."""
+  pictureURL_not_ends_with: String
+  country: String
+
+  """All values that are not equal to given value."""
+  country_not: String
+
+  """All values that are contained in given list."""
+  country_in: [String!]
+
+  """All values that are not contained in given list."""
+  country_not_in: [String!]
+
+  """All values less than the given value."""
+  country_lt: String
+
+  """All values less than or equal the given value."""
+  country_lte: String
+
+  """All values greater than the given value."""
+  country_gt: String
+
+  """All values greater than or equal the given value."""
+  country_gte: String
+
+  """All values containing the given string."""
+  country_contains: String
+
+  """All values not containing the given string."""
+  country_not_contains: String
+
+  """All values starting with the given string."""
+  country_starts_with: String
+
+  """All values not starting with the given string."""
+  country_not_starts_with: String
+
+  """All values ending with the given string."""
+  country_ends_with: String
+
+  """All values not ending with the given string."""
+  country_not_ends_with: String
+  podiums: Int
+
+  """All values that are not equal to given value."""
+  podiums_not: Int
+
+  """All values that are contained in given list."""
+  podiums_in: [Int!]
+
+  """All values that are not contained in given list."""
+  podiums_not_in: [Int!]
+
+  """All values less than the given value."""
+  podiums_lt: Int
+
+  """All values less than or equal the given value."""
+  podiums_lte: Int
+
+  """All values greater than the given value."""
+  podiums_gt: Int
+
+  """All values greater than or equal the given value."""
+  podiums_gte: Int
+  championshipWins: Int
+
+  """All values that are not equal to given value."""
+  championshipWins_not: Int
+
+  """All values that are contained in given list."""
+  championshipWins_in: [Int!]
+
+  """All values that are not contained in given list."""
+  championshipWins_not_in: [Int!]
+
+  """All values less than the given value."""
+  championshipWins_lt: Int
+
+  """All values less than or equal the given value."""
+  championshipWins_lte: Int
+
+  """All values greater than the given value."""
+  championshipWins_gt: Int
+
+  """All values greater than or equal the given value."""
+  championshipWins_gte: Int
 }
 
 type DriverSubscriptionPayload {
@@ -172,6 +500,7 @@ input DriverSubscriptionWhereInput {
 }
 
 input DriverUpdateInput {
+  number: Int
   name: String
   team: String
   points: Int
@@ -183,7 +512,19 @@ input DriverUpdateInput {
   boosts: FanBoostUpdateManyWithoutDriverInput
 }
 
+input DriverUpdateManyDataInput {
+  number: Int
+  name: String
+  team: String
+  points: Int
+  pictureURL: String
+  country: String
+  podiums: Int
+  championshipWins: Int
+}
+
 input DriverUpdateManyMutationInput {
+  number: Int
   name: String
   team: String
   points: Int
@@ -199,7 +540,14 @@ input DriverUpdateManyWithoutPostedByInput {
   disconnect: [DriverWhereUniqueInput!]
   delete: [DriverWhereUniqueInput!]
   update: [DriverUpdateWithWhereUniqueWithoutPostedByInput!]
+  updateMany: [DriverUpdateManyWithWhereNestedInput!]
+  deleteMany: [DriverScalarWhereInput!]
   upsert: [DriverUpsertWithWhereUniqueWithoutPostedByInput!]
+}
+
+input DriverUpdateManyWithWhereNestedInput {
+  where: DriverScalarWhereInput!
+  data: DriverUpdateManyDataInput!
 }
 
 input DriverUpdateOneRequiredWithoutBoostsInput {
@@ -210,6 +558,7 @@ input DriverUpdateOneRequiredWithoutBoostsInput {
 }
 
 input DriverUpdateWithoutBoostsDataInput {
+  number: Int
   name: String
   team: String
   points: Int
@@ -221,6 +570,7 @@ input DriverUpdateWithoutBoostsDataInput {
 }
 
 input DriverUpdateWithoutPostedByDataInput {
+  number: Int
   name: String
   team: String
   points: Int
@@ -318,6 +668,28 @@ input DriverWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  number: Int
+
+  """All values that are not equal to given value."""
+  number_not: Int
+
+  """All values that are contained in given list."""
+  number_in: [Int!]
+
+  """All values that are not contained in given list."""
+  number_not_in: [Int!]
+
+  """All values less than the given value."""
+  number_lt: Int
+
+  """All values less than or equal the given value."""
+  number_lte: Int
+
+  """All values greater than the given value."""
+  number_gt: Int
+
+  """All values greater than or equal the given value."""
+  number_gte: Int
   name: String
 
   """All values that are not equal to given value."""
@@ -615,6 +987,57 @@ type FanBoostPreviousValues {
   id: ID!
 }
 
+input FanBoostScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FanBoostScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FanBoostScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FanBoostScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+}
+
 type FanBoostSubscriptionPayload {
   mutation: MutationType!
   node: FanBoost
@@ -665,6 +1088,7 @@ input FanBoostUpdateManyWithoutDriverInput {
   disconnect: [FanBoostWhereUniqueInput!]
   delete: [FanBoostWhereUniqueInput!]
   update: [FanBoostUpdateWithWhereUniqueWithoutDriverInput!]
+  deleteMany: [FanBoostScalarWhereInput!]
   upsert: [FanBoostUpsertWithWhereUniqueWithoutDriverInput!]
 }
 
@@ -674,6 +1098,7 @@ input FanBoostUpdateManyWithoutUserInput {
   disconnect: [FanBoostWhereUniqueInput!]
   delete: [FanBoostWhereUniqueInput!]
   update: [FanBoostUpdateWithWhereUniqueWithoutUserInput!]
+  deleteMany: [FanBoostScalarWhereInput!]
   upsert: [FanBoostUpsertWithWhereUniqueWithoutUserInput!]
 }
 
