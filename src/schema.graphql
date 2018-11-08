@@ -15,7 +15,7 @@ type Mutation {
     deleteDriver(id:ID!): Driver
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!,confirmPassword: String!): User!
-    deleteUser(password: String!): User
+    deleteUser(id:ID!, password: String!): User!
 }
 
 type SuccessMessage {

@@ -165,8 +165,7 @@ async function requestReset(parent, args, context, info){
 
 
 async function resetPassword(parent, args, context,info){
-    console.log(args.password)
-    console.log(args.confirmPassword)
+ 
     //verify that passwords to indeed match
    if(args.password !== args.confirmPassword){
        throw new Error("Your passwords do not match");
@@ -201,35 +200,40 @@ async function resetPassword(parent, args, context,info){
    return updateUser
 }
 
-async function deleteUser(parent, context, args,info ){
+async function deleteUser (parent,args,  context  ,info ){
     //lets check if the user exisist and has the password
 
-    const userId = getUserId(context)
+    //const userId = getUserId(context)
+    try{
 
-    const userExists = await context.db.exists.users({
-        
-        user: {id: userId},
-       
-    })
-     
-
-    if (!userExists){
-        throw new Error("You do not exisit")
-    }
-
-    const user = await context.db.query.users({
-        where:{id:userId}
-    })
+        console.log(args.id);
+        const userExists = await context.db.query.users({
+            
+            where: {id: args.id},
+           
+        })
+         
     
-    if(user.password !== args.password){
-        throw new Error("Incorrect password");
+        if (!userExists){
+            throw new Error("You do not exisit")
+        }
+    
+      
+        const vaild = await bcrypt.compare(args.password,userExists[0].password)
+        
+       
+        if (!vaild){
+            throw new Error("Incorrect password");
+        }
+    
+       
+    
+        return context.db.mutation.deleteUser({
+            where: {id: args.id}
+        })
+    } catch (e){
+       throw new Error(e)
     }
-
-   
-
-    return await context.db.mutation.deleteUser({
-        where: {id: userId}
-    })
 }
 
 module.exports = {
