@@ -207,7 +207,6 @@ async function deleteUser (parent,args,  context  ,info ){
     //const userId = getUserId(context)
     try{
 
-        console.log(args.id);
         const userExists = await context.db.query.users({
             
             where: {id: args.id},

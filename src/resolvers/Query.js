@@ -35,7 +35,17 @@ function driver(parent, args,context,info){
     return context.db.query.driver({where:{id: args.id}},info)
 }
 
+function me (parent,args,context,info){
+    if(!context.request.userId){
+        return null
+    }
+    return context.db.query.user({
+        where: {id:context.request.userId},
+    },info)
+}
+
 module.exports ={
     driver,
     feed,
+    me
 }

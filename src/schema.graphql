@@ -4,6 +4,7 @@ type Query {
     info: String!
     feed(filter: String, skip: Int, first: Int, orderBy: DriverOrderByInput): Feed!
     driver(id:ID!): Driver
+    me: User
 }
 
 type Mutation {
