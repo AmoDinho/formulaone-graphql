@@ -21,11 +21,11 @@ type User {
     resetTokenExpiry: Float
     password: String!
     drivers: [Driver!]!
-    boosts: [FanBoost!]!
+    boosts: [FanBoost!]! @relation(name:"UsersBoosts", onDelete:CASCADE)
 }
 
 type FanBoost {
     id: ID! @unique
     driver: Driver! @relation(name:"FanBoost",onDelete:CASCADE)
-    user: User!
+    user: User! @relation(name:"UsersBoosts", onDelete:CASCADE)
 }
