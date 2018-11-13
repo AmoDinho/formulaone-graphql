@@ -45,4 +45,6 @@ type Circuit {
     latitude: Float!
     flyAway: Boolean!
     postedBy: User
+    trackMap: String!
+    trackImage: String!
 }

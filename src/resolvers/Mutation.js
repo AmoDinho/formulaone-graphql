@@ -234,6 +234,28 @@ async function deleteUser (parent,args,  context  ,info ){
     } catch (e){
        throw new Error(e)
     }
+
+
+}
+
+function createCircuit(parent,args,context,info){
+    const userId = getUserId(context)
+
+    return context.db.mutation.createCircuit({
+        data : {
+            name: args.name,
+            country: args.country,
+            numOfLaps: args.numOfLaps,
+            description: args.description,
+            raceDistance: args.raceDistance,
+            circuitLength: args.circuitLength,
+            lapRecord: args.lapRecord,
+            address: args.address,
+            longitude: args.longitude,
+            latitude: args.latitude,
+            flyAway: args.flyAway
+        }
+    },info)
 }
 
 module.exports = {
@@ -245,5 +267,6 @@ module.exports = {
     deleteDriver,
     requestReset,
     resetPassword,
-    deleteUser
+    deleteUser,
+    createCircuit
 }
