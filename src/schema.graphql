@@ -1,9 +1,11 @@
-# import Driver, DriverSubscriptionPayload, FanBoost, FanBoostSubscriptionPayload, DriverOrderByInput from "./generated/prisma.graphql"
+# import * from "./generated/prisma.graphql"
 
 type Query {
     info: String!
     feed(filter: String, skip: Int, first: Int, orderBy: DriverOrderByInput): Feed!
     driver(id:ID!): Driver
+    tracks(filter: String, skip: Int, first: Int, orderBy: CircuitOrderByInput): Tracks!
+    circuit(id:ID!): Circuit
     me: User
 }
 
@@ -17,6 +19,9 @@ type Mutation {
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!,confirmPassword: String!): User!
     deleteUser(id:ID!, password: String!): User!
+    createCircuit(name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!): Circuit!
+    updateCircuit(id: ID!,name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!): Circuit!
+    deleteCircuit(id: ID!): Circuit!
 }
 
 type SuccessMessage {
@@ -40,8 +45,14 @@ type Feed {
     count: Int!
 }
 
+type Tracks {
+    circuits:[Circuit!]!
+    count: Int!
+}
+
 type Subscription {
     newDriver: DriverSubscriptionPayload
     newBoost: FanBoostSubscriptionPayload
+    newCircuit: CircuitSubscriptionPayload
 }
 

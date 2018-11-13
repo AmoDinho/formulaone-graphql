@@ -21,6 +21,7 @@ type User {
     resetTokenExpiry: Float
     password: String!
     drivers: [Driver!]!
+    circuits: [Circuit!]!
     boosts: [FanBoost!]! @relation(name:"UsersBoosts", onDelete:CASCADE)
 }
 
@@ -28,4 +29,20 @@ type FanBoost {
     id: ID! @unique
     driver: Driver! @relation(name:"FanBoost",onDelete:CASCADE)
     user: User! @relation(name:"UsersBoosts", onDelete:CASCADE)
+}
+
+type Circuit {
+    id: ID! @unique
+    name: String!
+    country: String!
+    numOfLaps: Int!
+    description: String!
+    raceDistance: Float!
+    circuitLength: Float!
+    lapRecord: Float!
+    address:String!
+    longitude: Float!
+    latitude: Float!
+    flyAway: Boolean!
+    postedBy: User
 }

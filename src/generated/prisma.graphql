@@ -1,5 +1,9 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Thu Nov 08 2018 13:17:50 GMT+0200 (South Africa Standard Time)
+# timestamp: Tue Nov 13 2018 12:38:50 GMT+0200 (South Africa Standard Time)
+
+type AggregateCircuit {
+  count: Int!
+}
 
 type AggregateDriver {
   count: Int!
@@ -16,6 +20,943 @@ type AggregateUser {
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Circuit implements Node {
+  id: ID!
+  name: String!
+  country: String!
+  numOfLaps: Int!
+  description: String!
+  raceDistance: Float!
+  circuitLength: Float!
+  lapRecord: Float!
+  address: String!
+  longitude: Float!
+  latitude: Float!
+  flyAway: Boolean!
+  postedBy: User
+}
+
+"""A connection to a list of items."""
+type CircuitConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CircuitEdge]!
+  aggregate: AggregateCircuit!
+}
+
+input CircuitCreateInput {
+  name: String!
+  country: String!
+  numOfLaps: Int!
+  description: String!
+  raceDistance: Float!
+  circuitLength: Float!
+  lapRecord: Float!
+  address: String!
+  longitude: Float!
+  latitude: Float!
+  flyAway: Boolean!
+  postedBy: UserCreateOneWithoutCircuitsInput
+}
+
+input CircuitCreateManyWithoutPostedByInput {
+  create: [CircuitCreateWithoutPostedByInput!]
+  connect: [CircuitWhereUniqueInput!]
+}
+
+input CircuitCreateWithoutPostedByInput {
+  name: String!
+  country: String!
+  numOfLaps: Int!
+  description: String!
+  raceDistance: Float!
+  circuitLength: Float!
+  lapRecord: Float!
+  address: String!
+  longitude: Float!
+  latitude: Float!
+  flyAway: Boolean!
+}
+
+"""An edge in a connection."""
+type CircuitEdge {
+  """The item at the end of the edge."""
+  node: Circuit!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CircuitOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  country_ASC
+  country_DESC
+  numOfLaps_ASC
+  numOfLaps_DESC
+  description_ASC
+  description_DESC
+  raceDistance_ASC
+  raceDistance_DESC
+  circuitLength_ASC
+  circuitLength_DESC
+  lapRecord_ASC
+  lapRecord_DESC
+  address_ASC
+  address_DESC
+  longitude_ASC
+  longitude_DESC
+  latitude_ASC
+  latitude_DESC
+  flyAway_ASC
+  flyAway_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CircuitPreviousValues {
+  id: ID!
+  name: String!
+  country: String!
+  numOfLaps: Int!
+  description: String!
+  raceDistance: Float!
+  circuitLength: Float!
+  lapRecord: Float!
+  address: String!
+  longitude: Float!
+  latitude: Float!
+  flyAway: Boolean!
+}
+
+input CircuitScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CircuitScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CircuitScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CircuitScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  country: String
+
+  """All values that are not equal to given value."""
+  country_not: String
+
+  """All values that are contained in given list."""
+  country_in: [String!]
+
+  """All values that are not contained in given list."""
+  country_not_in: [String!]
+
+  """All values less than the given value."""
+  country_lt: String
+
+  """All values less than or equal the given value."""
+  country_lte: String
+
+  """All values greater than the given value."""
+  country_gt: String
+
+  """All values greater than or equal the given value."""
+  country_gte: String
+
+  """All values containing the given string."""
+  country_contains: String
+
+  """All values not containing the given string."""
+  country_not_contains: String
+
+  """All values starting with the given string."""
+  country_starts_with: String
+
+  """All values not starting with the given string."""
+  country_not_starts_with: String
+
+  """All values ending with the given string."""
+  country_ends_with: String
+
+  """All values not ending with the given string."""
+  country_not_ends_with: String
+  numOfLaps: Int
+
+  """All values that are not equal to given value."""
+  numOfLaps_not: Int
+
+  """All values that are contained in given list."""
+  numOfLaps_in: [Int!]
+
+  """All values that are not contained in given list."""
+  numOfLaps_not_in: [Int!]
+
+  """All values less than the given value."""
+  numOfLaps_lt: Int
+
+  """All values less than or equal the given value."""
+  numOfLaps_lte: Int
+
+  """All values greater than the given value."""
+  numOfLaps_gt: Int
+
+  """All values greater than or equal the given value."""
+  numOfLaps_gte: Int
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  raceDistance: Float
+
+  """All values that are not equal to given value."""
+  raceDistance_not: Float
+
+  """All values that are contained in given list."""
+  raceDistance_in: [Float!]
+
+  """All values that are not contained in given list."""
+  raceDistance_not_in: [Float!]
+
+  """All values less than the given value."""
+  raceDistance_lt: Float
+
+  """All values less than or equal the given value."""
+  raceDistance_lte: Float
+
+  """All values greater than the given value."""
+  raceDistance_gt: Float
+
+  """All values greater than or equal the given value."""
+  raceDistance_gte: Float
+  circuitLength: Float
+
+  """All values that are not equal to given value."""
+  circuitLength_not: Float
+
+  """All values that are contained in given list."""
+  circuitLength_in: [Float!]
+
+  """All values that are not contained in given list."""
+  circuitLength_not_in: [Float!]
+
+  """All values less than the given value."""
+  circuitLength_lt: Float
+
+  """All values less than or equal the given value."""
+  circuitLength_lte: Float
+
+  """All values greater than the given value."""
+  circuitLength_gt: Float
+
+  """All values greater than or equal the given value."""
+  circuitLength_gte: Float
+  lapRecord: Float
+
+  """All values that are not equal to given value."""
+  lapRecord_not: Float
+
+  """All values that are contained in given list."""
+  lapRecord_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lapRecord_not_in: [Float!]
+
+  """All values less than the given value."""
+  lapRecord_lt: Float
+
+  """All values less than or equal the given value."""
+  lapRecord_lte: Float
+
+  """All values greater than the given value."""
+  lapRecord_gt: Float
+
+  """All values greater than or equal the given value."""
+  lapRecord_gte: Float
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  longitude: Float
+
+  """All values that are not equal to given value."""
+  longitude_not: Float
+
+  """All values that are contained in given list."""
+  longitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  longitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  longitude_lt: Float
+
+  """All values less than or equal the given value."""
+  longitude_lte: Float
+
+  """All values greater than the given value."""
+  longitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  longitude_gte: Float
+  latitude: Float
+
+  """All values that are not equal to given value."""
+  latitude_not: Float
+
+  """All values that are contained in given list."""
+  latitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  latitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  latitude_lt: Float
+
+  """All values less than or equal the given value."""
+  latitude_lte: Float
+
+  """All values greater than the given value."""
+  latitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  latitude_gte: Float
+  flyAway: Boolean
+
+  """All values that are not equal to given value."""
+  flyAway_not: Boolean
+}
+
+type CircuitSubscriptionPayload {
+  mutation: MutationType!
+  node: Circuit
+  updatedFields: [String!]
+  previousValues: CircuitPreviousValues
+}
+
+input CircuitSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CircuitSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CircuitSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CircuitSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CircuitWhereInput
+}
+
+input CircuitUpdateInput {
+  name: String
+  country: String
+  numOfLaps: Int
+  description: String
+  raceDistance: Float
+  circuitLength: Float
+  lapRecord: Float
+  address: String
+  longitude: Float
+  latitude: Float
+  flyAway: Boolean
+  postedBy: UserUpdateOneWithoutCircuitsInput
+}
+
+input CircuitUpdateManyDataInput {
+  name: String
+  country: String
+  numOfLaps: Int
+  description: String
+  raceDistance: Float
+  circuitLength: Float
+  lapRecord: Float
+  address: String
+  longitude: Float
+  latitude: Float
+  flyAway: Boolean
+}
+
+input CircuitUpdateManyMutationInput {
+  name: String
+  country: String
+  numOfLaps: Int
+  description: String
+  raceDistance: Float
+  circuitLength: Float
+  lapRecord: Float
+  address: String
+  longitude: Float
+  latitude: Float
+  flyAway: Boolean
+}
+
+input CircuitUpdateManyWithoutPostedByInput {
+  create: [CircuitCreateWithoutPostedByInput!]
+  connect: [CircuitWhereUniqueInput!]
+  disconnect: [CircuitWhereUniqueInput!]
+  delete: [CircuitWhereUniqueInput!]
+  update: [CircuitUpdateWithWhereUniqueWithoutPostedByInput!]
+  updateMany: [CircuitUpdateManyWithWhereNestedInput!]
+  deleteMany: [CircuitScalarWhereInput!]
+  upsert: [CircuitUpsertWithWhereUniqueWithoutPostedByInput!]
+}
+
+input CircuitUpdateManyWithWhereNestedInput {
+  where: CircuitScalarWhereInput!
+  data: CircuitUpdateManyDataInput!
+}
+
+input CircuitUpdateWithoutPostedByDataInput {
+  name: String
+  country: String
+  numOfLaps: Int
+  description: String
+  raceDistance: Float
+  circuitLength: Float
+  lapRecord: Float
+  address: String
+  longitude: Float
+  latitude: Float
+  flyAway: Boolean
+}
+
+input CircuitUpdateWithWhereUniqueWithoutPostedByInput {
+  where: CircuitWhereUniqueInput!
+  data: CircuitUpdateWithoutPostedByDataInput!
+}
+
+input CircuitUpsertWithWhereUniqueWithoutPostedByInput {
+  where: CircuitWhereUniqueInput!
+  update: CircuitUpdateWithoutPostedByDataInput!
+  create: CircuitCreateWithoutPostedByInput!
+}
+
+input CircuitWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CircuitWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CircuitWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CircuitWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  country: String
+
+  """All values that are not equal to given value."""
+  country_not: String
+
+  """All values that are contained in given list."""
+  country_in: [String!]
+
+  """All values that are not contained in given list."""
+  country_not_in: [String!]
+
+  """All values less than the given value."""
+  country_lt: String
+
+  """All values less than or equal the given value."""
+  country_lte: String
+
+  """All values greater than the given value."""
+  country_gt: String
+
+  """All values greater than or equal the given value."""
+  country_gte: String
+
+  """All values containing the given string."""
+  country_contains: String
+
+  """All values not containing the given string."""
+  country_not_contains: String
+
+  """All values starting with the given string."""
+  country_starts_with: String
+
+  """All values not starting with the given string."""
+  country_not_starts_with: String
+
+  """All values ending with the given string."""
+  country_ends_with: String
+
+  """All values not ending with the given string."""
+  country_not_ends_with: String
+  numOfLaps: Int
+
+  """All values that are not equal to given value."""
+  numOfLaps_not: Int
+
+  """All values that are contained in given list."""
+  numOfLaps_in: [Int!]
+
+  """All values that are not contained in given list."""
+  numOfLaps_not_in: [Int!]
+
+  """All values less than the given value."""
+  numOfLaps_lt: Int
+
+  """All values less than or equal the given value."""
+  numOfLaps_lte: Int
+
+  """All values greater than the given value."""
+  numOfLaps_gt: Int
+
+  """All values greater than or equal the given value."""
+  numOfLaps_gte: Int
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  raceDistance: Float
+
+  """All values that are not equal to given value."""
+  raceDistance_not: Float
+
+  """All values that are contained in given list."""
+  raceDistance_in: [Float!]
+
+  """All values that are not contained in given list."""
+  raceDistance_not_in: [Float!]
+
+  """All values less than the given value."""
+  raceDistance_lt: Float
+
+  """All values less than or equal the given value."""
+  raceDistance_lte: Float
+
+  """All values greater than the given value."""
+  raceDistance_gt: Float
+
+  """All values greater than or equal the given value."""
+  raceDistance_gte: Float
+  circuitLength: Float
+
+  """All values that are not equal to given value."""
+  circuitLength_not: Float
+
+  """All values that are contained in given list."""
+  circuitLength_in: [Float!]
+
+  """All values that are not contained in given list."""
+  circuitLength_not_in: [Float!]
+
+  """All values less than the given value."""
+  circuitLength_lt: Float
+
+  """All values less than or equal the given value."""
+  circuitLength_lte: Float
+
+  """All values greater than the given value."""
+  circuitLength_gt: Float
+
+  """All values greater than or equal the given value."""
+  circuitLength_gte: Float
+  lapRecord: Float
+
+  """All values that are not equal to given value."""
+  lapRecord_not: Float
+
+  """All values that are contained in given list."""
+  lapRecord_in: [Float!]
+
+  """All values that are not contained in given list."""
+  lapRecord_not_in: [Float!]
+
+  """All values less than the given value."""
+  lapRecord_lt: Float
+
+  """All values less than or equal the given value."""
+  lapRecord_lte: Float
+
+  """All values greater than the given value."""
+  lapRecord_gt: Float
+
+  """All values greater than or equal the given value."""
+  lapRecord_gte: Float
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  longitude: Float
+
+  """All values that are not equal to given value."""
+  longitude_not: Float
+
+  """All values that are contained in given list."""
+  longitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  longitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  longitude_lt: Float
+
+  """All values less than or equal the given value."""
+  longitude_lte: Float
+
+  """All values greater than the given value."""
+  longitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  longitude_gte: Float
+  latitude: Float
+
+  """All values that are not equal to given value."""
+  latitude_not: Float
+
+  """All values that are contained in given list."""
+  latitude_in: [Float!]
+
+  """All values that are not contained in given list."""
+  latitude_not_in: [Float!]
+
+  """All values less than the given value."""
+  latitude_lt: Float
+
+  """All values less than or equal the given value."""
+  latitude_lte: Float
+
+  """All values greater than the given value."""
+  latitude_gt: Float
+
+  """All values greater than or equal the given value."""
+  latitude_gte: Float
+  flyAway: Boolean
+
+  """All values that are not equal to given value."""
+  flyAway_not: Boolean
+  postedBy: UserWhereInput
+}
+
+input CircuitWhereUniqueInput {
+  id: ID
 }
 
 scalar DateTime
@@ -1199,20 +2140,26 @@ type Mutation {
   createDriver(data: DriverCreateInput!): Driver!
   createUser(data: UserCreateInput!): User!
   createFanBoost(data: FanBoostCreateInput!): FanBoost!
+  createCircuit(data: CircuitCreateInput!): Circuit!
   updateDriver(data: DriverUpdateInput!, where: DriverWhereUniqueInput!): Driver
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateFanBoost(data: FanBoostUpdateInput!, where: FanBoostWhereUniqueInput!): FanBoost
+  updateCircuit(data: CircuitUpdateInput!, where: CircuitWhereUniqueInput!): Circuit
   deleteDriver(where: DriverWhereUniqueInput!): Driver
   deleteUser(where: UserWhereUniqueInput!): User
   deleteFanBoost(where: FanBoostWhereUniqueInput!): FanBoost
+  deleteCircuit(where: CircuitWhereUniqueInput!): Circuit
   upsertDriver(where: DriverWhereUniqueInput!, create: DriverCreateInput!, update: DriverUpdateInput!): Driver!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertFanBoost(where: FanBoostWhereUniqueInput!, create: FanBoostCreateInput!, update: FanBoostUpdateInput!): FanBoost!
+  upsertCircuit(where: CircuitWhereUniqueInput!, create: CircuitCreateInput!, update: CircuitUpdateInput!): Circuit!
   updateManyDrivers(data: DriverUpdateManyMutationInput!, where: DriverWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyCircuits(data: CircuitUpdateManyMutationInput!, where: CircuitWhereInput): BatchPayload!
   deleteManyDrivers(where: DriverWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyFanBoosts(where: FanBoostWhereInput): BatchPayload!
+  deleteManyCircuits(where: CircuitWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1246,12 +2193,15 @@ type Query {
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   fanBoosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost]!
+  circuits(where: CircuitWhereInput, orderBy: CircuitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Circuit]!
   driver(where: DriverWhereUniqueInput!): Driver
   user(where: UserWhereUniqueInput!): User
   fanBoost(where: FanBoostWhereUniqueInput!): FanBoost
+  circuit(where: CircuitWhereUniqueInput!): Circuit
   driversConnection(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DriverConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   fanBoostsConnection(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FanBoostConnection!
+  circuitsConnection(where: CircuitWhereInput, orderBy: CircuitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CircuitConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1264,6 +2214,7 @@ type Subscription {
   driver(where: DriverSubscriptionWhereInput): DriverSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   fanBoost(where: FanBoostSubscriptionWhereInput): FanBoostSubscriptionPayload
+  circuit(where: CircuitSubscriptionWhereInput): CircuitSubscriptionPayload
 }
 
 type User implements Node {
@@ -1274,6 +2225,7 @@ type User implements Node {
   resetTokenExpiry: Float
   password: String!
   drivers(where: DriverWhereInput, orderBy: DriverOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Driver!]
+  circuits(where: CircuitWhereInput, orderBy: CircuitOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Circuit!]
   boosts(where: FanBoostWhereInput, orderBy: FanBoostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FanBoost!]
 }
 
@@ -1294,11 +2246,17 @@ input UserCreateInput {
   resetTokenExpiry: Float
   password: String!
   drivers: DriverCreateManyWithoutPostedByInput
+  circuits: CircuitCreateManyWithoutPostedByInput
   boosts: FanBoostCreateManyWithoutUserInput
 }
 
 input UserCreateOneWithoutBoostsInput {
   create: UserCreateWithoutBoostsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCircuitsInput {
+  create: UserCreateWithoutCircuitsInput
   connect: UserWhereUniqueInput
 }
 
@@ -1314,6 +2272,17 @@ input UserCreateWithoutBoostsInput {
   resetTokenExpiry: Float
   password: String!
   drivers: DriverCreateManyWithoutPostedByInput
+  circuits: CircuitCreateManyWithoutPostedByInput
+}
+
+input UserCreateWithoutCircuitsInput {
+  name: String!
+  email: String!
+  resetToken: String
+  resetTokenExpiry: Float
+  password: String!
+  drivers: DriverCreateManyWithoutPostedByInput
+  boosts: FanBoostCreateManyWithoutUserInput
 }
 
 input UserCreateWithoutDriversInput {
@@ -1322,6 +2291,7 @@ input UserCreateWithoutDriversInput {
   resetToken: String
   resetTokenExpiry: Float
   password: String!
+  circuits: CircuitCreateManyWithoutPostedByInput
   boosts: FanBoostCreateManyWithoutUserInput
 }
 
@@ -1408,6 +2378,7 @@ input UserUpdateInput {
   resetTokenExpiry: Float
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
+  circuits: CircuitUpdateManyWithoutPostedByInput
   boosts: FanBoostUpdateManyWithoutUserInput
 }
 
@@ -1426,6 +2397,15 @@ input UserUpdateOneRequiredWithoutBoostsInput {
   upsert: UserUpsertWithoutBoostsInput
 }
 
+input UserUpdateOneWithoutCircuitsInput {
+  create: UserCreateWithoutCircuitsInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutCircuitsDataInput
+  upsert: UserUpsertWithoutCircuitsInput
+}
+
 input UserUpdateOneWithoutDriversInput {
   create: UserCreateWithoutDriversInput
   connect: UserWhereUniqueInput
@@ -1442,6 +2422,17 @@ input UserUpdateWithoutBoostsDataInput {
   resetTokenExpiry: Float
   password: String
   drivers: DriverUpdateManyWithoutPostedByInput
+  circuits: CircuitUpdateManyWithoutPostedByInput
+}
+
+input UserUpdateWithoutCircuitsDataInput {
+  name: String
+  email: String
+  resetToken: String
+  resetTokenExpiry: Float
+  password: String
+  drivers: DriverUpdateManyWithoutPostedByInput
+  boosts: FanBoostUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithoutDriversDataInput {
@@ -1450,12 +2441,18 @@ input UserUpdateWithoutDriversDataInput {
   resetToken: String
   resetTokenExpiry: Float
   password: String
+  circuits: CircuitUpdateManyWithoutPostedByInput
   boosts: FanBoostUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutBoostsInput {
   update: UserUpdateWithoutBoostsDataInput!
   create: UserCreateWithoutBoostsInput!
+}
+
+input UserUpsertWithoutCircuitsInput {
+  update: UserUpdateWithoutCircuitsDataInput!
+  create: UserCreateWithoutCircuitsInput!
 }
 
 input UserUpsertWithoutDriversInput {
@@ -1697,6 +2694,9 @@ input UserWhereInput {
   drivers_every: DriverWhereInput
   drivers_some: DriverWhereInput
   drivers_none: DriverWhereInput
+  circuits_every: CircuitWhereInput
+  circuits_some: CircuitWhereInput
+  circuits_none: CircuitWhereInput
   boosts_every: FanBoostWhereInput
   boosts_some: FanBoostWhereInput
   boosts_none: FanBoostWhereInput
