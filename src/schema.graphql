@@ -19,8 +19,8 @@ type Mutation {
     requestReset(email: String!): SuccessMessage
     resetPassword(resetToken: String!, password: String!,confirmPassword: String!): User!
     deleteUser(id:ID!, password: String!): User!
-    createCircuit(name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!): Circuit!
-    updateCircuit(id: ID!,name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!): Circuit!
+    createCircuit(name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!,trackMap: String!,trackImage: String!): Circuit!
+    updateCircuit(id: ID!,name: String!,country: String!,numOfLaps: Int!,description: String!,raceDistance: Float!,circuitLength: Float!,lapRecord: Float!,address:String!,longitude: Float!,latitude: Float!,flyAway: Boolean!,trackMap: String!,trackImage: String!): Circuit!
     deleteCircuit(id: ID!): Circuit!
 }
 

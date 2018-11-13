@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/public-volcanoking-719/formulaone-graphql/dev
-# timestamp: Tue Nov 13 2018 12:38:50 GMT+0200 (South Africa Standard Time)
+# timestamp: Tue Nov 13 2018 12:54:16 GMT+0200 (South Africa Standard Time)
 
 type AggregateCircuit {
   count: Int!
@@ -36,6 +36,8 @@ type Circuit implements Node {
   latitude: Float!
   flyAway: Boolean!
   postedBy: User
+  trackMap: String!
+  trackImage: String!
 }
 
 """A connection to a list of items."""
@@ -60,6 +62,8 @@ input CircuitCreateInput {
   longitude: Float!
   latitude: Float!
   flyAway: Boolean!
+  trackMap: String!
+  trackImage: String!
   postedBy: UserCreateOneWithoutCircuitsInput
 }
 
@@ -80,6 +84,8 @@ input CircuitCreateWithoutPostedByInput {
   longitude: Float!
   latitude: Float!
   flyAway: Boolean!
+  trackMap: String!
+  trackImage: String!
 }
 
 """An edge in a connection."""
@@ -116,6 +122,10 @@ enum CircuitOrderByInput {
   latitude_DESC
   flyAway_ASC
   flyAway_DESC
+  trackMap_ASC
+  trackMap_DESC
+  trackImage_ASC
+  trackImage_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -135,6 +145,8 @@ type CircuitPreviousValues {
   longitude: Float!
   latitude: Float!
   flyAway: Boolean!
+  trackMap: String!
+  trackImage: String!
 }
 
 input CircuitScalarWhereInput {
@@ -482,6 +494,86 @@ input CircuitScalarWhereInput {
 
   """All values that are not equal to given value."""
   flyAway_not: Boolean
+  trackMap: String
+
+  """All values that are not equal to given value."""
+  trackMap_not: String
+
+  """All values that are contained in given list."""
+  trackMap_in: [String!]
+
+  """All values that are not contained in given list."""
+  trackMap_not_in: [String!]
+
+  """All values less than the given value."""
+  trackMap_lt: String
+
+  """All values less than or equal the given value."""
+  trackMap_lte: String
+
+  """All values greater than the given value."""
+  trackMap_gt: String
+
+  """All values greater than or equal the given value."""
+  trackMap_gte: String
+
+  """All values containing the given string."""
+  trackMap_contains: String
+
+  """All values not containing the given string."""
+  trackMap_not_contains: String
+
+  """All values starting with the given string."""
+  trackMap_starts_with: String
+
+  """All values not starting with the given string."""
+  trackMap_not_starts_with: String
+
+  """All values ending with the given string."""
+  trackMap_ends_with: String
+
+  """All values not ending with the given string."""
+  trackMap_not_ends_with: String
+  trackImage: String
+
+  """All values that are not equal to given value."""
+  trackImage_not: String
+
+  """All values that are contained in given list."""
+  trackImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  trackImage_not_in: [String!]
+
+  """All values less than the given value."""
+  trackImage_lt: String
+
+  """All values less than or equal the given value."""
+  trackImage_lte: String
+
+  """All values greater than the given value."""
+  trackImage_gt: String
+
+  """All values greater than or equal the given value."""
+  trackImage_gte: String
+
+  """All values containing the given string."""
+  trackImage_contains: String
+
+  """All values not containing the given string."""
+  trackImage_not_contains: String
+
+  """All values starting with the given string."""
+  trackImage_starts_with: String
+
+  """All values not starting with the given string."""
+  trackImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  trackImage_ends_with: String
+
+  """All values not ending with the given string."""
+  trackImage_not_ends_with: String
 }
 
 type CircuitSubscriptionPayload {
@@ -535,6 +627,8 @@ input CircuitUpdateInput {
   longitude: Float
   latitude: Float
   flyAway: Boolean
+  trackMap: String
+  trackImage: String
   postedBy: UserUpdateOneWithoutCircuitsInput
 }
 
@@ -550,6 +644,8 @@ input CircuitUpdateManyDataInput {
   longitude: Float
   latitude: Float
   flyAway: Boolean
+  trackMap: String
+  trackImage: String
 }
 
 input CircuitUpdateManyMutationInput {
@@ -564,6 +660,8 @@ input CircuitUpdateManyMutationInput {
   longitude: Float
   latitude: Float
   flyAway: Boolean
+  trackMap: String
+  trackImage: String
 }
 
 input CircuitUpdateManyWithoutPostedByInput {
@@ -594,6 +692,8 @@ input CircuitUpdateWithoutPostedByDataInput {
   longitude: Float
   latitude: Float
   flyAway: Boolean
+  trackMap: String
+  trackImage: String
 }
 
 input CircuitUpdateWithWhereUniqueWithoutPostedByInput {
@@ -952,6 +1052,86 @@ input CircuitWhereInput {
 
   """All values that are not equal to given value."""
   flyAway_not: Boolean
+  trackMap: String
+
+  """All values that are not equal to given value."""
+  trackMap_not: String
+
+  """All values that are contained in given list."""
+  trackMap_in: [String!]
+
+  """All values that are not contained in given list."""
+  trackMap_not_in: [String!]
+
+  """All values less than the given value."""
+  trackMap_lt: String
+
+  """All values less than or equal the given value."""
+  trackMap_lte: String
+
+  """All values greater than the given value."""
+  trackMap_gt: String
+
+  """All values greater than or equal the given value."""
+  trackMap_gte: String
+
+  """All values containing the given string."""
+  trackMap_contains: String
+
+  """All values not containing the given string."""
+  trackMap_not_contains: String
+
+  """All values starting with the given string."""
+  trackMap_starts_with: String
+
+  """All values not starting with the given string."""
+  trackMap_not_starts_with: String
+
+  """All values ending with the given string."""
+  trackMap_ends_with: String
+
+  """All values not ending with the given string."""
+  trackMap_not_ends_with: String
+  trackImage: String
+
+  """All values that are not equal to given value."""
+  trackImage_not: String
+
+  """All values that are contained in given list."""
+  trackImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  trackImage_not_in: [String!]
+
+  """All values less than the given value."""
+  trackImage_lt: String
+
+  """All values less than or equal the given value."""
+  trackImage_lte: String
+
+  """All values greater than the given value."""
+  trackImage_gt: String
+
+  """All values greater than or equal the given value."""
+  trackImage_gte: String
+
+  """All values containing the given string."""
+  trackImage_contains: String
+
+  """All values not containing the given string."""
+  trackImage_not_contains: String
+
+  """All values starting with the given string."""
+  trackImage_starts_with: String
+
+  """All values not starting with the given string."""
+  trackImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  trackImage_ends_with: String
+
+  """All values not ending with the given string."""
+  trackImage_not_ends_with: String
   postedBy: UserWhereInput
 }
 
