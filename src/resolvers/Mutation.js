@@ -260,6 +260,24 @@ function createCircuit(parent,args,context,info){
     },info)
 }
 
+
+updateCircuit = (parent,args,context,info)=>{
+    const userId = getUserId(context)
+
+    const updates = {...args}
+
+    delete updates.id
+
+    return context.db.mutation.updateCircuit({
+        data:updates,
+        where: {
+            id:args.id
+        }
+
+    },info)
+}
+
+
 module.exports = {
     signup,
     login,
@@ -270,5 +288,6 @@ module.exports = {
     requestReset,
     resetPassword,
     deleteUser,
-    createCircuit
+    createCircuit,
+    updateCircuit
 }
