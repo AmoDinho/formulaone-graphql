@@ -277,6 +277,33 @@ updateCircuit = (parent,args,context,info)=>{
     },info)
 }
 
+deleteCircuit = async (parent,args,context,info) => {
+   
+   try{
+       //make sure the user is logged in
+    const userId = getUserId(context)
+   
+    //check if the circuit exists
+    const circuitExists = await context.db.query.circuits({
+        where: {id: args.id}
+    })
+
+    if (!circuitExists){
+        throw new Error("This circuits does not exist")
+    }
+
+    return context.db.mutation.deleteCircuit({
+        where: {id:args.id}
+    })
+     
+   }
+   catch(e){
+       throw new Error(e)
+   }
+   
+    
+
+}
 
 module.exports = {
     signup,
@@ -289,5 +316,6 @@ module.exports = {
     resetPassword,
     deleteUser,
     createCircuit,
-    updateCircuit
+    updateCircuit,
+    deleteCircuit
 }
