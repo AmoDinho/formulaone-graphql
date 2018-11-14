@@ -21,7 +21,18 @@ const newBoost = {
     subscribe: newBoostSubcribe
 }
 
+newCircuitSubscribe = (parent,args,context,info) => {
+    return context.db.subscription.circuit({
+        where: {mutation_in: ['CREATED']}
+    },info)
+}
+
+const newCircuit = {
+    subscribe: newCircuitSubscribe
+}
+
 module.exports = {
     newDriver,
     newBoost,
+    newCircuit
 }
