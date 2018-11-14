@@ -44,10 +44,44 @@ function me (parent,args,context,info){
     },info)
 }
 
+async function tracks(root,args,context,info) {
+    const where = args.filter
+       ? {
+           OR: [
+               {name_contains:args.filter},
+               {country_contains: args.filter},
+           ],
+       }
+       : {}
 
+
+    const queriedCircuits = await context.db.query.circuits({
+        where, skip: args.skip,first: args.first, orderBy: args.orderBy
+    },`{id}`)
+
+    const countSelectionSet=`
+    {
+        aggregate{count}
+    }
+    `
+
+    const circuitsConnection = await context.db.query.circuitsConnection({},countSelectionSet)
+    console.log(circuitsConnection)
+
+    return {
+        count: circuitsConnection.aggregate.count,
+        circuitIds: queriedCircuits.map(circuit => circuit.id)
+    }
+}
+
+circuit = (parent, args, context,info) => {
+    return context.db.query.circuit({where: {id:args.id}},info)
+}
 
 module.exports ={
     driver,
     feed,
-    me
+    me,
+    circuit,
+    tracks
 }
