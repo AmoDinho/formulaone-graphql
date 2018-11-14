@@ -253,7 +253,9 @@ function createCircuit(parent,args,context,info){
             address: args.address,
             longitude: args.longitude,
             latitude: args.latitude,
-            flyAway: args.flyAway
+            flyAway: args.flyAway,
+            trackMap: args.trackMap,
+            trackImage: args.trackImage
         }
     },info)
 }
