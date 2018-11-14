@@ -44,7 +44,7 @@ function me (parent,args,context,info){
     },info)
 }
 
-async function tracks(root,args,context,info) {
+  tracks = async (root,args,context,info) =>{
     const where = args.filter
        ? {
            OR: [
@@ -58,6 +58,8 @@ async function tracks(root,args,context,info) {
     const queriedCircuits = await context.db.query.circuits({
         where, skip: args.skip,first: args.first, orderBy: args.orderBy
     },`{id}`)
+    console.log(queriedCircuits)
+
 
     const countSelectionSet=`
     {
@@ -65,13 +67,16 @@ async function tracks(root,args,context,info) {
     }
     `
 
-    const circuitsConnection = await context.db.query.circuitsConnection({},countSelectionSet)
+    const circuitsConnection = await context.db.query.circuitsConnection({}, countSelectionSet)
     console.log(circuitsConnection)
 
     return {
         count: circuitsConnection.aggregate.count,
-        circuitIds: queriedCircuits.map(circuit => circuit.id)
+        circuitIds: queriedCircuits.map(circuits => circuits.id)
     }
+    console.log(circuitIds)
+
+
 }
 
 circuit = (parent, args, context,info) => {

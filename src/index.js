@@ -5,6 +5,7 @@ const Mutation = require('./resolvers/Mutation')
 const AuthPayload = require('./resolvers/AuthPayload')
 const Subscription = require('./resolvers/Subscription')
 const Feed = require('./resolvers/Feed')
+const Tracks = require('./resolvers/Track')
 require('dotenv').config({ path: '.env' });
 
 const resolvers = {
@@ -12,7 +13,8 @@ const resolvers = {
     Mutation,
     AuthPayload,
     Subscription,
-    Feed
+    Feed,
+    Tracks
 
 }
 
