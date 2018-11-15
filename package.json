@@ -8,7 +8,6 @@
     "playground": "nodemon -e js,graphql -x  graphql playground",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
-    
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
-    "jest-cli": "^23.6.0"
+    "jest-cli": "^23.6.0",
+    "lodash": "^4.17.11"
   }
 }
