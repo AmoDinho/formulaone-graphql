@@ -115,16 +115,12 @@ async function deleteDriver(parnet,args, context, info){
     //Then delete the driver 
        const where = {id: args.id};
    
-        const boosts = await context.db.exists.FanBoost({
-            
-            user: {id: userId},
-            driver: {id: args.driverId},
-
-        })
+       const driverExists = await context.db.query.drivers({
+        where: {id: where}
+    })
 
 
-
-        if (!boosts){
+        if (!driverExists){
             throw new Error("this driver does not exist");
         }
       
