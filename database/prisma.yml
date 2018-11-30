@@ -1,6 +1,9 @@
 
 #HTTP ENDPOINT
-endpoint: ${env:PRISMA_ENDPOINT}
+#endpoint: ${env:PRISMA_ENDPOINT}
+#endpoint: https://us1.prisma.sh/fan-boost/fan-boost-demo-2/dev
+endpoint:   https://fan-boost-two-48a9866683.herokuapp.com/fan-two/dev
+
 
 #point to file that has datamodel
 datamodel: datamodel.graphql

@@ -20,6 +20,7 @@
     "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4",
     "postmark": "^2.2.0",
+    "prisma": "1.21.1",
     "prisma-binding": "^2.1.5"
   },
   "devDependencies": {
