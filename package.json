@@ -9,6 +9,7 @@
     "npm": "5.x"
   },
   "scripts": {
+    "start": "graphql -x node src/index.js",
     "server": "nodemon -e js, graphql -x node src/index.js ",
     "playground": "nodemon -e js,graphql -x  graphql playground",
     "test": "jest --coverage",
