@@ -10,7 +10,7 @@ type Query {
 }
 
 type Mutation {
-    createDriver(name: String!, number: Int!, team: String!, points: Int!, pictureURL: String!, podiums: Int!, championshipWins:Int!, country:String!): Driver!
+    driver(name: String!, number: Int!, team: String!, points: Int!, pictureURL: String!, podiums: Int!, championshipWins:Int!, country:String!): Driver!
     signup(email: String!, password:String!,name:String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     boost(driverId: ID!): FanBoost
