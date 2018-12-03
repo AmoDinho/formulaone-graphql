@@ -28,7 +28,7 @@ const server = new GraphQLServer({
         ...req,
         db: new Prisma({
             typeDefs: 'src/generated/prisma.graphql',
-            endpoint: 'https://fan-boost-two-48a9866683.herokuapp.com/fan-two/dev',
+            endpoint: 'https://fan-boost-two-48a9866683.herokuapp.com/fan-two/dev/',
             secret: process.env.PRISMA_SECRET,
             debug: process.env.NODE_ENV==="development" ? true:false,
         }),
