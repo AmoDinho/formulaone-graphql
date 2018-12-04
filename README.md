@@ -1,5 +1,13 @@
-# Formula One App 🏎
-This is the backend for a fullstack GraphQL Formula One app. It uses Prisma as the Database layer.
+# FanBoost 🏎
+This is the backend for FanBoost. It is a powered Node GraphQL backend that use Prisma to interact with a SQL Postgress database. 
+
+## Features
+
+* Prisma Datalayer: Prisma sits inbetween your GraphQL API and database and acts as an ORM.
+* GraphQL API: The API is built with GraphQL-Yoga. Which is an Express server that supports GraphQL APIs.
+* Real-Time Subscriptions: The app use Websockets to enable real-time interactions with the API. 
+* Transactional Emails: Nodemailer and PostMark are used to send transactional emails.
+* Authentification: The app has uses Json Web Tokens to help with Authenticating users.
 
 The API supports the following queries:
 
@@ -98,3 +106,13 @@ $ yarn run playground
 Playground should open on `localhost://3000`
 
 Make sure you start the backend server first before the front-end repo. Then follow the commands and make sure it runs through `localhost://3001`.
+
+
+
+The following resources were used to create this app: 
+
+* [Advanced React](https://github.com/wesbos/Advanced-React)
+* [Boilerplate for a Fullstack GraphQL App with React & Prisma](https://github.com/alan345/naperg)
+* [How to GraphQL:React-Apollo](https://github.com/howtographql/react-apollo)
+* [React-Apollo Docs](https://www.apollographql.com/docs/react/)
+* [GraphQL Docs](https://graphql.org/)
