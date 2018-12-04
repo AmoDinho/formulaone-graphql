@@ -1,0 +1,60 @@
+mutation {
+     createUser(data: {
+      email: "cole@dreamville.com"
+      password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
+      name: "Jermaine"
+      drivers: {
+          create: [{  
+        name: "Brendon Hartley"
+        team: "Toro Rosso"
+        country: "New Zealand"
+        podiums: 0 
+        points: 4
+        number: 28
+        pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/brendon-hartley/_jcr_content/image.img.1024.medium.jpg/1533294231878.jpg"
+        championshipWins: 0
+        },{
+        name: "Nico Hulkenberg"
+        team: "Renault"
+        country: "Germany"
+        podiums: 0 
+        points: 474
+        number: 27
+        pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/nico-hulkenberg/_jcr_content/image.img.1024.medium.jpg/1536135087181.jpg"
+        championshipWins: 0
+        }]
+      }
+        
+    }) {
+        
+        id
+    }
+
+    secondDriver: createDriver(data:{
+        name: "Esteban Ocon"
+        team: "Force India"
+        country: "France"
+        podiums: 0 
+        points: 136
+        number: 31
+        pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/esteban-ocon/_jcr_content/image.img.1024.medium.jpg/1533294282682.jpg"
+        championshipWins: 0
+    }){
+        id
+    }
+
+   firstDriver:  createDriver(data:{
+        name: "Kevin Magnussen"
+        team: "Haas"
+        country: "Denmark"
+        podiums: 1 
+        points: 137
+        number: 20
+        pictureURL: "https://www.formula1.com/content/fom-website/en/drivers/kevin-magnussen/_jcr_content/image.img.1024.medium.jpg/1536135077427.jpg"
+        championshipWins: 0
+    }){
+        id
+    }
+   
+}
+

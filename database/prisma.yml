@@ -5,6 +5,11 @@ endpoint: ${env:PRISMA_ENDPOINT}
 #point to file that has datamodel
 datamodel: datamodel.graphql
 
+
+seed:
+  import: seed.graphql
+  
+
 # deploy hook
 hooks:
   post-deploy:
