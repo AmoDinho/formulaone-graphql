@@ -10,7 +10,6 @@ type Driver {
     podiums: Int!
     championshipWins:Int!
     postedBy: User
-    price:Float!
     boosts: [FanBoost!]! @relation(name:"FanBoost",onDelete:CASCADE)
 }
 
