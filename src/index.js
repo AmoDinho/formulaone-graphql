@@ -15,7 +15,6 @@ const resolvers = {
     Subscription,
     Feed,
     Tracks
-
 }
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000
@@ -33,7 +32,6 @@ const server = new GraphQLServer({
             debug: process.env.NODE_ENV==="development" ? true:false,
         }),
     }),
-
 })
 
 server.start({port: PORT}, () => console.log(`Server is running on http://localhost:${PORT}`))
