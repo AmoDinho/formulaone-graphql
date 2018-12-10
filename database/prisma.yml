@@ -1,6 +1,6 @@
 
 #HTTP ENDPOINT
-endpoint: ${env:PRISMA_ENDPOINT}
+#endpoint: ${env:PRISMA_ENDPOINT}
 #endpoint: https://us1.prisma.sh/fan-boost/fan-boost-demo-2/dev
 #endpoint:   https://fan-boost-two-48a9866683.herokuapp.com/fan-three/dev/
 #endpoint: https://eu1.prisma.sh/amo-moloko-04eff1/test/dev
@@ -28,4 +28,4 @@ secret: ${env:PRISMA_SECRET}
 
 
 
-#endpoint: https://fan-boost-new-eb982e7d8c.herokuapp.com/boost/dev
+endpoint: https://fan-boost-new-eb982e7d8c.herokuapp.com/boost/dev
