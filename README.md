@@ -1,5 +1,5 @@
 # FanBoost 🏎
-This is the backend for FanBoost. It is a powered Node GraphQL backend that use Prisma to interact with a SQL Postgress database. 
+This is the backend for FanBoost. It is powered by (GraphQL-Yoga)[https://github.com/prisma/graphql-yoga] an Express GraphQL server and (Prisma)[https://prisma.io] to interact with a SQL Postgress database. 
 
 ## Features
 
@@ -7,7 +7,7 @@ This is the backend for FanBoost. It is a powered Node GraphQL backend that use 
 * GraphQL API: The API is built with GraphQL-Yoga. Which is an Express server that supports GraphQL APIs.
 * Real-Time Subscriptions: The app use Websockets to enable real-time interactions with the API. 
 * Transactional Emails: Nodemailer and PostMark are used to send transactional emails.
-* Authentification: The app has uses Json Web Tokens to help with Authenticating users.
+* Authentification: The app  uses Json Web Tokens to help with Authenticating users.
 
 The API supports the following queries:
 
@@ -19,6 +19,14 @@ The API supports the following queries:
 
    driver(
    id: ID!): Driver!
+   
+    tracks(
+    filter: String, 
+    skip: Int, 
+    first: Int, 
+    orderBy: CircuitOrderByInput): Tracks!
+    
+    circuit(id:ID!): Circuit
    ```
 
 
@@ -45,6 +53,56 @@ The API supports the following mutations:
     
     boost(
     driverId: ID!): FanBoost
+    
+    updateDriver(
+    id:ID!,
+    name: String!, 
+    number: Int!, 
+    team: String!, 
+    points: Int!, 
+    pictureURL: String!, 
+    podiums: Int!, 
+    championshipWins:Int!, 
+    country:String!): Driver!
+    
+    deleteDriver(id:ID!): Driver
+    
+    requestReset(email: String!): SuccessMessage
+    
+    resetPassword(resetToken: String!, password: String!,confirmPassword: String!): User!
+    
+    deleteUser(id:ID!, password: String!): User!
+    
+    createCircuit(name: String!,
+    country: String!,
+    numOfLaps: Int!,
+    description: String!,
+    raceDistance: Float!,
+    circuitLength: Float!,
+    lapRecord: Float!,
+    address:String!,
+    longitude: Float!,
+    latitude: Float!,
+    flyAway: Boolean!,
+    trackMap: String!,
+    trackImage: String!): Circuit!
+    
+    updateCircuit(id: ID!,
+    name: String!,
+    country: String!,
+    numOfLaps: Int!,
+    description: String!,
+    raceDistance: Float!,
+    circuitLength: Float!,
+    lapRecord: Float!,
+    address:String!,
+    longitude: Float!,
+    latitude: Float!,
+    flyAway: Boolean!,
+    trackMap: String!,
+    trackImage: String!): Circuit!
+    
+    deleteCircuit(id: ID!): Circuit!
 
 ```
 
