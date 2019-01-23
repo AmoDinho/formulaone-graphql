@@ -1,5 +1,5 @@
 # FanBoost 🏎
-This is the backend for FanBoost. It is powered by (GraphQL-Yoga)[https://github.com/prisma/graphql-yoga] an Express GraphQL server and (Prisma)[https://prisma.io] to interact with a SQL Postgress database. 
+This is the backend for FanBoost. It is powered by [GraphQL-Yoga](https://github.com/prisma/graphql-yoga) an Express GraphQL server and [Prisma](https://prisma.io) to interact with a SQL Postgress database. 
 
 ## Features
 
